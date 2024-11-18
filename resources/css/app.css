@@ -1,0 +1,168 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.text-type-1 {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: black; /* Màu chữ mặc định */
+    font-weight: 500;
+}
+.text-type-2 {
+    color: #7c7777; /* Màu chữ mặc định */
+    font-weight:500;
+}
+
+.text-type-1:hover {
+    color: #ff8b8b; /* Màu chữ khi hover */
+}
+
+
+  /* Khi di chuột vào mục dropdown, dropdown sẽ hiển thị */
+  .nav-item.dropdown:hover .dropdown-menu {
+      display: block;
+  }
+
+  /* Tùy chỉnh dấu mũi tên khi hover */
+  .nav-item.dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+  }
+
+  /* Tùy chỉnh hiển thị các liên kết trong dropdown */
+  .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+  }
+
+.text-orange{
+  color: #ffd227cc;
+  font-weight: bold;
+}
+
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Đảm bảo khung cố định cho ảnh trong carousel */
+.carousel-item {
+    position: relative; /* Để đảm bảo ảnh có thể phóng to và không bị tràn ngoài */
+    overflow: hidden; /* Ẩn phần ảnh thừa */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh phủ đầy khung mà không bị méo */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Thêm hiệu ứng mượt mà */
+}
+
+/* Phóng to ảnh khi di chuột vào */
+.carousel-item:hover img {
+    transform: scale(1.05); /* Phóng to ảnh */  
+}
+
+
+/* Khung chứa mũi tên */
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 30%; /* Đặt mũi tên vào giữa chiều dọc */
+    transform: translateY(180%); /* Cân đối mũi tên */
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối trong suốt */
+    color: white; /* Màu mũi tên */
+    border: 2px solid white; /* Đường viền trắng */
+    border-radius: 5px; /* Bo góc nhẹ */
+    padding: 6px 8px; /* Khoảng cách nhỏ hơn */
+    z-index: 10; /* Đảm bảo mũi tên ở trên cùng */
+    font-size: 18px; /* Kích thước mũi tên nhỏ hơn */
+    display: flex;
+    align-items: center; /* Căn giữa mũi tên trong khung */
+    justify-content: center; /* Căn giữa mũi tên trong khung */
+    width: 60px; /* Thu nhỏ chiều rộng của khung */
+    height: 100px; /* Thu nhỏ chiều cao của khung */
+    transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Mũi tên trái */
+.carousel-control-prev {
+    left: 50px; /* Đưa mũi tên trái vào gần hơn */
+}
+
+/* Mũi tên phải */
+.carousel-control-next {
+    right: 50px; /* Đưa mũi tên phải vào gần hơn */
+}
+
+/* Hiệu ứng hover: Thay đổi màu nền */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: #ff9f00; /* Đổi màu viền khi hover */
+}
+
+/* Thay thế biểu tượng mũi tên mặc định */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none;
+}
+
+/* Tạo mũi tên trái */
+.carousel-control-prev::before {
+    content: '←'; /* Dấu mũi tên trái */
+    font-size: 20px; /* Kích thước mũi tên nhỏ hơn */
+    color: white;
+}
+
+/* Tạo mũi tên phải */
+.carousel-control-next::before {
+    content: '→'; /* Dấu mũi tên phải */
+    font-size: 20px; /* Kích thước mũi tên nhỏ hơn */
+    color: white;
+}
+
+/* Hiệu ứng hover cho mũi tên */
+.carousel-control-prev:hover::before {
+    color: #ff9f00; /* Đổi màu khi hover */
+}
+
+.carousel-control-next:hover::before {
+    color: #ff9f00; /* Đổi màu khi hover */
+}
+
+
+/* Navbar sticky */
+.navbarstick {
+    position: sticky; /* Giữ navbar ở vị trí cố định khi cuộn trang */
+    top: 0px; /* Đặt navbar ở trên cùng */
+    z-index: 1000; /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */
+    width: 100%; /* Đảm bảo chiều rộng đầy đủ */
+}
+
+
