@@ -1,16 +1,16 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 .text-type-1 {
     text-decoration: none; /* Bỏ gạch chân */
-    color: black; /* Màu chữ mặc định */
-    font-weight: 500;
+    color: #cdcdcd; /* Màu chữ mặc định */
+    font-weight: 400;
 }
 .text-type-2 {
     color: #7c7777; /* Màu chữ mặc định */
-    font-weight:500;
+    font-weight:400;
 }
 
 .text-type-1:hover {
-    color: #ff8b8b; /* Màu chữ khi hover */
+    color: white; /* Màu chữ khi hover */
 }
 
 
@@ -166,3 +166,464 @@
 }
 
 
+/* Cải thiện giao diện của menu Quản lý */
+.nav-item.dropdown {
+    position: relative;
+    margin-left: 13px;
+}
+
+/* Cải thiện menu Quản lý */
+.nav-link.dropdown-toggle {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+
+/* Dropdown menu với nền đen trong suốt */
+.dropdown-menu {
+    border-radius: 5px ; /* Bo góc menu */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Đổ bóng cho menu */
+    min-width: 200px; /* Đặt độ rộng tối thiểu cho menu */
+    background-color: rgba(0, 0, 0, 0.5); /* Nền đen trong suốt (0.8 opacity) */
+    padding: 15px 0; /* Tăng khoảng cách giữa các mục menu (tăng chiều cao) */
+    backdrop-filter: blur(10px); /* Làm mờ phía sau menu */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Hiệu ứng khi mở menu */
+    min-height: 105px; /* Đảm bảo menu có chiều cao tối thiểu */
+    z-index: 9999; /* Đảm bảo menu dropdown nằm phía trên các phần tử khác */
+    visibility: hidden; /* Ẩn menu dropdown khi không hover */
+    opacity: 0; /* Ẩn menu dropdown */
+}
+
+/* Hiệu ứng hover cho mục menu */
+.dropdown-item {
+    padding: 10px 20px; /* Khoảng cách trong mục menu */
+    font-size: 14px; /* Kích thước font chữ */
+    color: #fff; /* Màu chữ mặc định */
+    transition: background-color 0.2s ease; /* Hiệu ứng nền khi hover */
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Màu nền khi rê chuột vào mục menu */
+    color: #007bff; /* Màu chữ khi rê chuột */
+}
+
+/* Tạo hiệu ứng cho khi menu mở */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    visibility: visible; /* Hiển thị menu khi hover */
+    opacity: 1; /* Đảm bảo menu có thể hiển thị */
+}
+
+
+.logout-link {
+    background: transparent;  /* Xóa nền */
+    border: none;             /* Xóa viền */
+    padding: 0;               /* Xóa khoảng cách bên trong */
+    color: inherit;           /* Giữ nguyên màu sắc của văn bản (icon sẽ dùng màu hiện tại) */
+    cursor: pointer;         /* Đổi con trỏ thành hình bàn tay khi hover */
+}
+
+.logout-link i {
+    transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu cho icon khi hover */
+}
+
+.logout-link:hover i {
+    color: #ff6347;           /* Màu sắc khi hover lên icon (có thể thay đổi) */
+}
+
+
+/* Tùy chỉnh màu nền cho sidebar */
+.sidebar {
+    background-color: #ffffff; /* Màu nền trắng cho sidebar */
+    color: #000000; /* Màu chữ đen để dễ đọc */
+    width: 250px;
+    border-right: 1px solid #ddd; /* Thêm đường viền bên phải để phân biệt với phần còn lại */
+    position: fixed; /* Giữ sidebar cố định khi cuộn trang */
+}
+
+/* Màu cho các mục trong sidebar */
+.sidebar .nav-link {
+    color: #000000; /* Màu chữ đen cho các mục */
+    font-size: 0.875rem; /* Giảm kích thước chữ */
+}
+
+/* Màu khi hover trên các mục */
+.sidebar .nav-link:hover {
+    color: darkblue; /* Màu chữ vẫn giữ đen */
+    font-weight: 700;
+}
+
+/* Tùy chỉnh cho các dropdown item */
+.sidebar .dropdown-item {
+    color: #000000; /* Màu chữ đen cho các mục dropdown */
+    font-size: 0.875rem; /* Giảm kích thước chữ */
+}
+
+.sidebar .fa-circle {
+    color: #000000; /* Màu chữ đen cho các mục dropdown */
+    font-size: 0.375rem; /* Giảm kích thước chữ */
+    margin-right: 8px; /* Thêm khoảng cách giữa icon và chữ */
+    vertical-align: middle; /* Canh giữa icon với text */
+    line-height: 1; /* Đảm bảo khoảng cách dòng không ảnh hưởng */
+}
+
+/* Khi hover vào các dropdown item */
+.sidebar .dropdown-item {
+    border-radius: 8px; /* Bo góc mặc định */
+    transition: background-color 0.5s ease, transform 0.3s ease; /* Hiệu ứng mượt */
+}
+
+.sidebar .dropdown-item:hover {
+    background-color: rgba(255, 0, 0, 0.3); /* Màu đỏ với độ trong suốt 30% */
+    color: #000000; /* Màu chữ vẫn giữ đen */
+    font-weight: 500;
+    border-radius: 20px; /* Bo góc khi hover */
+    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+}
+
+
+/* Hiển thị biểu tượng chevron khi dropdown mở */
+.sidebar .nav-link i.bi-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+
+
+/* Tùy chỉnh thêm cho phần mở rộng (collapse) */
+.sidebar .collapse {
+    padding-left: 1.5rem; /* Thêm khoảng cách cho các mục trong dropdown */
+}
+
+/* Tùy chỉnh cho các liên kết ở phía trên (Dashboard) */
+.sidebar p.h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1rem; /* Giảm kích thước chữ của tiêu đề */
+    color: rgb(29 66 100);
+}
+
+/* Đổi màu cho các icon */
+.icon-color {
+    color: rgb(29 66 100); /* Màu bạn muốn cho các icon, ví dụ: xanh dương */
+    font-size: 1.2rem; /* Giảm kích thước icon */
+}
+
+.icon-color:hover {
+    color: #0056b3; /* Màu khi hover */
+}
+
+/* Loại bỏ dấu chấm ở tất cả <li> */
+ul, ol {
+    list-style: none; /* Loại bỏ dấu chấm, số, hoặc ký hiệu */
+    margin: 0; /* Xóa khoảng cách mặc định */
+    padding: 0; /* Xóa padding mặc định */
+}
+.sidebar {
+    position: fixed; /* Sidebar cố định ở bên trái */
+    top: 0;
+    left: 10;
+    height: 100vh; /* Chiều cao toàn bộ màn hình */
+    background-color: #fff; /* Màu nền trắng */
+
+    overflow-y: auto;  /* Thêm thanh cuộn dọc khi nội dung tràn */
+    overflow-x: hidden; /* Ẩn thanh cuộn ngang nếu không cần thiết */
+
+}
+
+.sidebar a {
+    text-decoration: none;  /* Xóa gạch dưới */
+    color: inherit;  /* Lấy màu chữ từ phần tử cha */
+}
+/* Kiểu sidebar khi đang mở rộng */
+.sidebar {
+    width: 230px; /* Chiều rộng ban đầu của sidebar */
+    transition: width 1s ease; /* Thêm hiệu ứng chuyển đổi khi thay đổi width */
+    overflow: hidden; /* Ẩn phần nội dung khi thu nhỏ */
+}
+
+/* Kiểu sidebar khi bị thu nhỏ */
+.sidebar-hidden {
+    width: 40px; /* Chiều rộng khi sidebar bị thu nhỏ */
+
+}
+
+/* Các phần tử trong sidebar khi bị ẩn */
+.sidebar-content-hidden {
+    display: none; /* Ẩn các phần tử */
+}
+
+/* Các phần tử trong sidebar khi sidebar được mở rộng */
+.sidebar-content {
+    display: block; /* Hiển thị lại các phần tử */
+}
+/* Đặt độ rộng mặc định của content-admin */
+#content-admin {
+    width: 80%;  /* Độ rộng mặc định khi sidebar mở */
+    transition: width 1s ease;  /* Thêm hiệu ứng chuyển đổi khi thay đổi độ rộng */
+}
+/* Tùy chỉnh màu nền cho các input */
+.form-control {
+    background-color: #b9fff92b !important;
+    border-color: #ced4da !important;
+    color: #495057;
+}
+.custom-header {
+    background-color: #1d4264; /* Xanh dương Bootstrap */
+    color: #fff; /* Màu chữ trắng */
+    padding: 0.3rem;
+    border-radius: 0.25rem;
+    text-indent: 20px; /* Thụt vào 20px */
+}
+.rectangle-btn {
+    border-radius: 0; /* Không bo góc, nút hình chữ nhật */
+    padding: 0.5rem 1rem; /* Kích thước nút */
+}
+#main-image-preview .position-relative {
+    display: inline-block;
+    position: relative;
+}
+
+
+.extra-image-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.extra-image-item img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.extra-image-item .remove-btn {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+    font-size: 26px;
+    border: none;
+    background: none;
+}
+
+.extra-image-item input[type="text"] {
+    flex: 1;
+}
+
+.remove-btn:hover {
+    color: red;  /* Thay đổi màu khi hover */
+    text-shadow: 0 0 5px red; /* Thêm bóng đổ cho chữ 'X' */
+}
+
+#main-image-preview .remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 26px;
+    color: red;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#main-image-preview .remove-btn:hover {
+    color: red;
+    text-shadow: 0 0 5px red; /* Thêm bóng đổ cho chữ 'X' */
+}
+
+.listView{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+#headder-listview {
+    position: sticky; /* Giữ navbar ở vị trí cố định khi cuộn trang */
+    top: 0px; /* Đặt navbar ở trên cùng */
+    z-index: 1000; /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */
+    width: 100%; /* Đảm bảo chiều rộng đầy đủ */
+}
+
+
+#category {
+    opacity: 0;
+    transform: translateY(-20px); /* Di chuyển lên trên */
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease;
+}
+
+#category.show {
+    opacity: 1;
+    transform: translateY(0); /* Di chuyển về vị trí ban đầu */
+    max-height: 500px; /* Đặt giá trị đủ lớn để chứa nội dung */
+}
+#advanced-filtering {
+    opacity: 0;
+    transform: translateY(-20px); /* Di chuyển lên trên */
+    height: 0; /* Bắt đầu từ chiều cao 0 */
+    overflow: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease; /* Chuyển tiếp chiều cao */
+}
+
+#advanced-filtering.show {
+    opacity: 1;
+    transform: translateY(0); /* Quay lại vị trí ban đầu */
+    height: auto; /* Cho phép nội dung tự động mở rộng */
+}
+
+
+
+.bg-c {
+    background-color: rgb(6 6 46 / 40%);
+    color: #f8f9fa; /* Màu chữ trắng nhạt Bootstrap */
+}
+
+.bg-c h6 {
+    color: #f8f9fa; /* Màu chữ trắng nhạt Bootstrap */
+}
+
+.bg-c label {
+    color: #f8f9fa; /* Màu nhãn trắng */
+}
+
+.form-control-sm::placeholder {
+    color:rgb(23 29 62 / 50%); /* Placeholder trắng nhạt */
+}
+
+
+
+.btn-c {
+    color: #f8f9fa; /* Chữ trắng nhạt */
+    border-color: #f8f9fa; /* Viền trắng nhạt */
+}
+
+.bg-input {
+    background-color: white !important;
+    color: black;
+}
+
+
+/* Trang trí phân trang đẹp và mượt mà */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.pagination .page-item {
+    margin: 0 3px;
+}
+
+.pagination .page-link {
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination .page-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+    border-color: #ccc;
+}
+/* Điều chỉnh diện mạo của các card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    object-fit: cover;
+}
+
+/* Ẩn Card View khi chưa kích hoạt */
+.card-view-content {
+    display: none;
+}
+/* Viền khi chọn icon */
+.border-selected {
+    border: 2px solid #007bff; /* Màu xanh dương khi chọn */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Tạo bóng cho nút khi chọn */
+}
+
+/* Điều chỉnh viền của các nút */
+button.btn {
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn tên sách hiển thị tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm nếu có văn bản vượt quá */
+    height: 3em; /* Giới hạn chiều cao tối đa của tiêu đề */
+    line-height: 1.5em; /* Điều chỉnh chiều cao dòng */
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between; /* Căn trái phải cho giá và nút */
+    align-items: center;
+}
+
+
+
+
+
+.card-img-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Tạo chiều sâu cho không gian 3D */
+}
+
+.card-cimg {
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease; /* Hiệu ứng chuyển động */
+    transform-origin: center; /* Điểm xoay ở giữa ảnh */
+    filter: brightness(1) contrast(1) saturate(1.1); /* Hiệu ứng ánh sáng mặc định */
+}
+
+/* Hiệu ứng khi hover */
+.card-cimg:hover {
+    transform: rotateY(45deg); /* Xoay ảnh 45 độ theo chiều dọc */
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4); /* Bóng đổ chỉ xuất hiện ở bên trái khi hover */
+
+}
+.text-weight-1 {
+    font-weight: 600;
+}

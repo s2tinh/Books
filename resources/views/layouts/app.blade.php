@@ -7,6 +7,7 @@
 
     <!-- Thêm CSS AOS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
 
     <!-- Sử dụng Vite để kết nối tài nguyên CSS đã biên dịch -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -29,7 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
+    
     <!-- Khởi tạo AOS -->
     <script>
         // Khởi tạo AOS với các tuỳ chọn

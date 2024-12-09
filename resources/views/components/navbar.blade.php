@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <div class="navbarstick">
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container">
                 <!-- Logo -->
                 <a class="navbar-brand" href="/" style="position: relative; display: inline-block;">
@@ -57,13 +57,35 @@
 
                         <!-- Giỏ hàng -->
                         <li class="nav-item">
-                            <a class="nav-link text-type-1 border" href="/gio-hang">
+                            <a class="nav-link text-type-1" href="/gio-hang">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         </li>
 
+                        @if(auth()->user() && (auth()->user()->hasRole('admin') || auth()->user()->can('manage_users')))
+                            <li class="nav-item dropdown " style="margin-left: 13px;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i> Quản lý
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                    <li>
+                                        <a class="dropdown-item" href="/admin">
+                                            Dashboard
+                                            <i class="fas fa-angle-right" style="float: right;"></i> <!-- Mũi tên bên phải -->
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/admin/settings">
+                                            Cài đặt hệ thống
+                                            <i class="fas fa-angle-right" style="float: right;"></i> <!-- Mũi tên bên phải -->
+                                        </a>
+                                    </li>
+                                    <!-- Thêm các mục menu khác tùy theo yêu cầu -->
+                                </ul>
+                            </li>
+                        @endif
 
-                        
+
                     </ul>
                 </div>
             </div>

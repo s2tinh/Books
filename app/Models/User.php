@@ -43,4 +43,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function roles()
+    {
+        return $this->morphToMany(Role::class, 'model', 'model_has_roles');
+    }
+
+    public function permissions()
+    {
+        return $this->morphToMany(Permission::class, 'model', 'model_has_permissions');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->permissions->contains('name', $permission);
+    }
 }
