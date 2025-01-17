@@ -7,13 +7,7 @@
                     <!-- Hiển thị tên người dùng và icon đăng xuất -->
                     <div class="me-3 text-dark d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tên người dùng">
                         <i class="fas fa-user me-1"></i>{{ Auth::user()->name }}
-                        <!-- Đăng xuất -->
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline ms-2">
-                            @csrf
-                            <button type="submit" class="btn btn-link p-0 text-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </form>
+
                     </div>
                 @else
                     <!-- Đăng nhập -->

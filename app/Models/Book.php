@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str; // Thêm Str để tạo UUID
-
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 class Book extends Model
 {
     use HasFactory;
-
+    use HasEagerLimit;
     /**
      * The table associated with the model.
      *
@@ -50,7 +50,7 @@ class Book extends Model
         'author',
         'price',
         'description',
-        'publication_date',
+        'year_publication',
         'sub_category_id',
         'images',
         'cover_type',
@@ -66,7 +66,7 @@ class Book extends Model
      * @var array
      */
     protected $casts = [
-        'publication_date' => 'date',
+        'year_publication' => 'integer',
         'price' => 'decimal:2',
     ];
 

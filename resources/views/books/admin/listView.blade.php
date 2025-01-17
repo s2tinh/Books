@@ -133,7 +133,7 @@
             <div class="col-md-3">
                 <h6>Năm xuất bản:</h6>
                 <input type="number" class="bg-input fbg-input orm-control-sm form-control border-0 border-bottom rounded-0 shadow-none search-input" 
-                       name="publication_date" min="1000" max="9999" placeholder="Nhập năm" />
+                       name="year_publication" min="1000" max="9999" placeholder="Nhập năm" />
             </div>
 
         </div>
@@ -165,7 +165,7 @@
             <!-- Bộ lọc theo publication_date -->
             <div class="col-md-3">
                 <h6>Ngày xuất bản:</h6>
-                <input type="date" class="form-control" name="publication_date" />
+                <input type="number" class="form-control" name="year_publication" />
             </div>
         </div>
     </div>
@@ -227,7 +227,7 @@
                         <td>{{ $book->author }}</td>
                         <td>{{ $book->publisher ?? 'Không xác định' }}</td>
                         <td class="text-center">
-                            <a href="{{ route('books.detailView', ['id' => $book->id]) }}" class="btn btn-sm btn-danger">View</a>
+                            <a href="{{ route('books.admin.detailView', ['id' => $book->id]) }}" class="btn btn-sm btn-danger">View</a>
 
                             </td>
                         </tr>
@@ -252,7 +252,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <span class="text-danger">{{ $book->price }} đ</span>
-                                <a href="{{ route('books.detailView', ['id' => $book->id]) }}" class="btn btn-sm btn-danger">View</a>
+                                <a href="{{ route('books.admin.detailView', ['id' => $book->id]) }}" class="btn btn-sm btn-danger">View</a>
 
                         </div>
                     </div>

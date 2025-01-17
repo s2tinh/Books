@@ -53,6 +53,41 @@
     </button>
 </div>
 </div>
+<hr>
+
+
+
+<div class="container">
+    @foreach($categories as $category)
+        <div class="category">
+            <p><a class="url text-muted" href="{{ route('home') }}">Trang chủ </a>/</p>
+            <h2 class="fs-4 fw-bold mt-1 mb-5">{{ $category['name'] }}</h2>
+
+            @foreach($category['sub_categories'] as $subCategory)
+                <div class="sub-category">
+                    <h3 class="fs-5 fw-bold">{{ $subCategory['name'] }}</h3>
+
+                    <!-- Hiển thị sách theo hàng ngang, mỗi hàng tối đa 5 ảnh -->
+                    <div class="d-flex book-container">
+                        <div class="books mb-5 mt-1" >
+                            @foreach($subCategory['books'] as $book)
+                                <div class="card cardx">
+                                 <img style="" src="{{ asset('storage/'.$book['images']) }}" class="card-img-top img-fluid" alt="{{ $book['title'] }}">
+
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ $book['title'] }}</h6>
+                                        <p class="">{{ $book['price'] }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+</div>
 
 <div class="container">
     <!-- Nội dung với hiệu ứng AOS -->

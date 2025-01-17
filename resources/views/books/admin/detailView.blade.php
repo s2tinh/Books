@@ -13,12 +13,12 @@
 
 <div class="container d-flex justify-content-start mb-3">
     <!-- Back Button -->
-    <a style="padding-top: 2px; padding-bottom: 2px; padding-left: 16px ; padding-right: 16px; margin-right: 8px " href="{{ route('books.listView') }}" class="btn btn-danger btn-sm rectangle-btn">
+    <a style="padding-top: 2px; padding-bottom: 2px; padding-left: 16px ; padding-right: 16px; margin-right: 8px " href="{{ route('books.admin.listView') }}" class="btn btn-danger btn-sm rectangle-btn">
         Back
     </a>
 
     <!-- Edit Button -->
-    <a style="padding-top: 2px; padding-bottom: 2px; padding-left: 16px; padding-right: 16px" href="{{ route('books.editView', ['id' => $book->id]) }}" class="btn btn-danger btn-sm rectangle-btn">
+    <a style="padding-top: 2px; padding-bottom: 2px; padding-left: 16px; padding-right: 16px" href="{{ route('books.admin.editView', ['id' => $book->id]) }}" class="btn btn-danger btn-sm rectangle-btn">
         Edit
     </a>
 
@@ -85,7 +85,7 @@
             </div>
             <div class="col-md-4">
                 <label class="form-label text-weight-1">Ngày xuất bản</label>
-                <p class="border-0 bg-light">{{ $book->publication_date }}</p>
+                <p class="border-0 bg-light">{{ $book->year_publication}}</p>
             </div>
         </div>
 

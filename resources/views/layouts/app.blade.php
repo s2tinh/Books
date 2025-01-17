@@ -11,13 +11,18 @@
 
     <!-- Sử dụng Vite để kết nối tài nguyên CSS đã biên dịch -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+
 </head>
 <body>
     <!-- Header -->
     @include('components.header')
 
     <!-- Navbar -->
-    @include('components.navbar')
+    @php
+        echo App\Http\Controllers\App\HomeController::navbar();
+    @endphp
 
     <main>
         @yield('content') <!-- Phần nội dung động sẽ được chèn tại đây -->

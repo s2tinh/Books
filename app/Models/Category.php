@@ -30,6 +30,6 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class, 'category_id', 'id');
     }
-
+ 
     
 }

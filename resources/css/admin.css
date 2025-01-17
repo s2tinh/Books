@@ -213,6 +213,103 @@
 }
 
 
+.logout-link {
+    background: transparent;  /* Xóa nền */
+    border: none;             /* Xóa viền */
+    padding: 0;               /* Xóa khoảng cách bên trong */
+    color: inherit;           /* Giữ nguyên màu sắc của văn bản (icon sẽ dùng màu hiện tại) */
+    cursor: pointer;         /* Đổi con trỏ thành hình bàn tay khi hover */
+}
+
+.logout-link i {
+    transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu cho icon khi hover */
+}
+
+.logout-link:hover i {
+    color: #ff6347;           /* Màu sắc khi hover lên icon (có thể thay đổi) */
+}
+
+
+/* Tùy chỉnh màu nền cho sidebar */
+.sidebar {
+    background-color: #ffffff; /* Màu nền trắng cho sidebar */
+    color: #000000; /* Màu chữ đen để dễ đọc */
+    width: 250px;
+    border-right: 1px solid #ddd; /* Thêm đường viền bên phải để phân biệt với phần còn lại */
+    position: fixed; /* Giữ sidebar cố định khi cuộn trang */
+}
+
+/* Màu cho các mục trong sidebar */
+.sidebar .nav-link {
+    color: #000000; /* Màu chữ đen cho các mục */
+    font-size: 0.875rem; /* Giảm kích thước chữ */
+}
+
+/* Màu khi hover trên các mục */
+.sidebar .nav-link:hover {
+    color: darkblue; /* Màu chữ vẫn giữ đen */
+    font-weight: 700;
+}
+
+/* Tùy chỉnh cho các dropdown item */
+.sidebar .dropdown-item {
+    color: #000000; /* Màu chữ đen cho các mục dropdown */
+    font-size: 0.875rem; /* Giảm kích thước chữ */
+}
+
+.sidebar .fa-circle {
+    color: #000000; /* Màu chữ đen cho các mục dropdown */
+    font-size: 0.375rem; /* Giảm kích thước chữ */
+    margin-right: 8px; /* Thêm khoảng cách giữa icon và chữ */
+    vertical-align: middle; /* Canh giữa icon với text */
+    line-height: 1; /* Đảm bảo khoảng cách dòng không ảnh hưởng */
+}
+
+/* Khi hover vào các dropdown item */
+.sidebar .dropdown-item {
+    border-radius: 8px; /* Bo góc mặc định */
+    transition: background-color 0.5s ease, transform 0.3s ease; /* Hiệu ứng mượt */
+}
+
+.sidebar .dropdown-item:hover {
+    background-color: rgba(255, 0, 0, 0.3); /* Màu đỏ với độ trong suốt 30% */
+    color: #000000; /* Màu chữ vẫn giữ đen */
+    font-weight: 500;
+    border-radius: 20px; /* Bo góc khi hover */
+    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+}
+
+
+/* Hiển thị biểu tượng chevron khi dropdown mở */
+.sidebar .nav-link i.bi-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+
+
+/* Tùy chỉnh thêm cho phần mở rộng (collapse) */
+.sidebar .collapse {
+    padding-left: 1.5rem; /* Thêm khoảng cách cho các mục trong dropdown */
+}
+
+/* Tùy chỉnh cho các liên kết ở phía trên (Dashboard) */
+.sidebar p.h4 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1rem; /* Giảm kích thước chữ của tiêu đề */
+    color: rgb(29 66 100);
+}
+
+/* Đổi màu cho các icon */
+.icon-color {
+    color: rgb(29 66 100); /* Màu bạn muốn cho các icon, ví dụ: xanh dương */
+    font-size: 1.2rem; /* Giảm kích thước icon */
+}
+
+.icon-color:hover {
+    color: #0056b3; /* Màu khi hover */
+}
 
 /* Loại bỏ dấu chấm ở tất cả <li> */
 ul, ol {
@@ -346,16 +443,15 @@ ul, ol {
     width: 100%; /* Đảm bảo chiều rộng đầy đủ */
 }
 
+.bg-c h6 {
+    color: #f8f9fa; /* Màu chữ trắng nhạt Bootstrap */
+}
+
+.bg-c label {
+    color: #f8f9fa; /* Màu nhãn trắng */
+}
 
 #category {
-
-    color: black;
-    position: absolute; /* Đặt vị trí tuyệt đối */
-    top: 80%; /* Hiển thị ngay bên dưới navbar */
-    left: 0;
-    width: 100%; /* Chiếm toàn bộ chiều ngang */
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: 1000; /* Đảm bảo hiển thị phía trên các phần tử khác */
     opacity: 0;
     transform: translateY(-20px); /* Di chuyển lên trên */
     max-height: 0;
@@ -385,8 +481,10 @@ ul, ol {
 
 
 
-
-
+.bg-c {
+    background-color: rgb(6 6 46 / 40%);
+    color: #f8f9fa; /* Màu chữ trắng nhạt Bootstrap */
+}
 
 .form-control-sm::placeholder {
     color:rgb(23 29 62 / 50%); /* Placeholder trắng nhạt */
@@ -531,62 +629,3 @@ button.btn {
 }
 
 
- .circle-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px; /* Đường kính của vòng tròn */
-        height: 40px;
-        border: 1px solid var(--bs-primary); /* Viền màu xanh primary */
-        border-radius: 50%; /* Làm cho nó thành hình tròn */
-        text-align: center;
-    }
-
-    .circle-icon i {
-        font-size: 18px; /* Kích thước biểu tượng */
-        color: var(--bs-primary); /* Màu của biểu tượng */
-    }
-    .url {
-    color: #808080;  /* Màu đen nhạt */
-    text-decoration: none;  /* Bỏ gạch dưới */
-    font-size: 16px;
-    }
-
-    .url:hover {
-        color: #007bff;  /* Màu xanh khi hover */
-    }
-
-/* Cấu trúc chung của book-container */
-.book-container {
-    width: 100%;
-    overflow: hidden;  /* Ẩn thanh cuộn */
-    cursor: grab;  /* Thay đổi con trỏ khi kéo */
-    transition: border 0.3s ease;  /* Thêm hiệu ứng khi border thay đổi */
-}
-
-
-
-/* Cấu trúc sách bên trong book-container */
-.books {
-    display: flex;
-    transition: transform 0.3s ease;  /* Thêm hiệu ứng mượt mà khi di chuyển */
-}
-
-/* Cấu trúc mỗi thẻ card */
-.cardx {
-    flex: 0 0 17%;
-    margin-right: 32px;  /* Khoảng cách giữa các thẻ card */
-    user-select: none;  /* Ngăn việc tô đen văn bản khi di chuột vào card */
-    transition: box-shadow 0.3s ease;  /* Thêm hiệu ứng mượt mà khi thay đổi box-shadow */
-}
-
-/* Khi hover vào thẻ card */
-.cardx:hover {
-    box-shadow: 0 0 10px var(--bs-primary);  /* Áp dụng hiệu ứng sáng lên với màu primary */
-}
-
-/* Ảnh trong thẻ card */
-.cardx img {
-    width: 100%;
-    height: auto;  /* Đảm bảo ảnh hiển thị đúng tỉ lệ */
-}

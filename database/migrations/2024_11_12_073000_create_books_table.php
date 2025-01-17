@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('author');
             $table->decimal('price', 10, 2);
             $table->text('description');
-            $table->date('publication_date');
+            $table->date('year_publication');
             $table->char('sub_category_id', 36);
             $table->string('images', 100);
             $table->string('cover_type')->nullable(); // Loại bìa
