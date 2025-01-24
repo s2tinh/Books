@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<div class="navbarstick">
+<div class="navbarstick border">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-white" style="padding: 0;">
             <div class="container">
@@ -37,10 +37,8 @@
                 </div>
             </div>
                         <!-- Links -->
-            <div class="col-md-5 d-flex justify-content-end" style="
-                padding-right: 0px;
-            ">
-                 <ul class="navbar-nav ms-auto">
+            <div class="col-md-5 d-flex justify-content-end" style="padding-right: 0px;">
+                            <ul class="navbar-nav ms-auto">
               
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,20 +50,18 @@
                                         <li><a class="dropdown-item" href="/dich-vu/tu-van">Tư vấn</a></li>
                                     </ul>
                                 </li>
+
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="/tin-tuc">Tin tức</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/gioi-thieu">Giới thiệu</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-primary circle-icon" href="/gio-hang">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li
+  
 
                                 @if(auth()->user() && (auth()->user()->hasRole('admin') || auth()->user()->can('manage_users')))
-                                <li class="nav-item dropdown" style="margin-left: 13px;">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-cogs"></i> Quản lý
                                     </a>
@@ -75,6 +71,11 @@
                                     </ul>
                                 </li>
                                 @endif
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary circle-icon" href="/gio-hang">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -204,3 +205,5 @@
     
 
 </script>
+
+

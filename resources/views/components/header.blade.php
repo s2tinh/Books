@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #fff; border-bottom: 1px solid #ddd;">
+<div class="container-fluid" style="background-color: #fff;">
     <div class="container py-3">
         <div class="row align-items-center">
             <!-- Thông tin liên hệ -->

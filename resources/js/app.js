@@ -120,56 +120,57 @@ if(document.getElementById('category')){
 }
 
 
-document.querySelectorAll('.book-container').forEach(container => {
-    let isMouseDown = false;
-    let startX;
-    let scrollLeft;
-    let momentum = false;
-    let startTime;  // Khai báo biến startTime
-    let speed = 0;
+  // Tạo thanh trượt
+    var priceSlider = document.getElementById('price-slider');
+    var priceMinInput = document.getElementById('price-min');
+    var priceMaxInput = document.getElementById('price-max');
 
-    container.addEventListener('mousedown', (e) => {
-        isMouseDown = true;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-        startTime = Date.now(); // Khởi tạo startTime khi bắt đầu kéo
-        container.style.cursor = 'grabbing'; // Đổi con trỏ khi kéo
-        momentum = false; // Dừng quán tính khi bắt đầu kéo
-    });
-
-    container.addEventListener('mouseleave', () => {
-        isMouseDown = false;
-        container.style.cursor = 'grab';
-    });
-
-    container.addEventListener('mouseup', () => {
-        isMouseDown = false;
-        container.style.cursor = 'grab';
-        momentum = true;
-        // Tính toán tốc độ quán tính dựa trên khoảng cách và thời gian kéo
-        const distance = container.scrollLeft - scrollLeft;
-        const time = Date.now() - startTime; // Tính thời gian kéo
-        speed = distance / time; // Tính tốc độ
-        requestAnimationFrame(applyMomentum);
-    });
-
-    container.addEventListener('mousemove', (e) => {
-        if (!isMouseDown) return;
-        e.preventDefault(); // Ngừng hành vi mặc định
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 2; // Điều chỉnh tốc độ cuộn
-        container.scrollLeft = scrollLeft - walk;
-    });
-
-    // Hàm áp dụng quán tính
-    function applyMomentum() {
-        if (!momentum) return;
-        container.scrollLeft += speed;
-        speed *= 1; // Giảm tốc độ theo thời gian
-        if (Math.abs(speed) > 0.5) {
-            requestAnimationFrame(applyMomentum);
-        } else {
-            momentum = false;
+    noUiSlider.create(priceSlider, {
+        start: [10000, 150000], // Giá trị ban đầu
+        connect: true, // Liên kết giữa 2 chấm kéo
+        range: {
+            'min': 0,
+            'max': 1000000
+        },
+        step: 1000, // Bước giá trị
+        tooltips: [false, false], // Không hiển thị tooltip
+        format: {
+            to: function (value) {
+                return Math.round(value); // Làm tròn giá trị
+            },
+            from: function (value) {
+                return value;
+            }
         }
+    });
+
+    // Cập nhật giá trị trên thanh trượt khi người dùng thay đổi ô nhập liệu
+    priceMinInput.addEventListener('change', function () {
+        priceSlider.noUiSlider.set([priceMinInput.value, null]);
+    });
+
+    priceMaxInput.addEventListener('change', function () {
+        priceSlider.noUiSlider.set([null, priceMaxInput.value]);
+    });
+
+    // Cập nhật giá trị các ô nhập liệu khi thanh trượt thay đổi
+    priceSlider.noUiSlider.on('update', function (values, handle) {
+        if (handle === 0) {
+            priceMinInput.value = values[0]; // Cập nhật giá trị của ô input min
+        } else {
+            priceMaxInput.value = values[1]; // Cập nhật giá trị của ô input max
+        }
+    });
+
+
+window.addEventListener("wheel", function(event) {
+    const sidebar = document.querySelector('.sidebar'); // Lấy sidebar
+    const currentScrollTop = document.documentElement.scrollTop || document.body.scrollTop; // Vị trí cuộn hiện tại
+
+    if (currentScrollTop >= 100) {
+        sidebar.style.top = '85px'; // Khi cuộn xuống 100px, sidebar sẽ ở vị trí top 85px
+    } else if (currentScrollTop <= 20) {
+        sidebar.style.top = '151px'; // Khi cuộn lên top, sidebar sẽ ở vị trí top 200px
     }
 });
+

@@ -10,30 +10,9 @@
                     <p>Email: <a href="mailto:tranvoanhtinh@gmail.com" class="text-white text-decoration-none">tranvoanhtinh@gmail.com</a></p>
                 </div>
 
-                <!-- Thông tin chung -->
-                <div class="col-md-4 mb-4">
-                    <h5>Thông tin chung</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Giới thiệu</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Sản phẩm - Dịch vụ</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Tuyển dụng</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Tin tức</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Sự kiện</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Liên hệ</a></li>
-                    </ul>
-                </div>
-
                 <!-- Hỗ trợ khách hàng -->
-                <div class="col-md-4 mb-4">
-                    <h5>Hỗ trợ khách hàng</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Các câu hỏi thường gặp</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Hướng dẫn sử dụng</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Hình thức thanh toán</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Chính sách bảo mật</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Quy định sử dụng</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Quy chế hoạt động</a></li>
-                    </ul>
+                <div class="col-md-8 mb-8">
+   
                 </div>
             </div>
             

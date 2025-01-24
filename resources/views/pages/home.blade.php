@@ -56,82 +56,120 @@
 <hr>
 
 
-
 <div class="container">
-    @foreach($categories as $category)
-        <div class="category">
-            <p><a class="url text-muted" href="{{ route('home') }}">Trang chủ </a>/</p>
-            <h2 class="fs-4 fw-bold mt-1 mb-5">{{ $category['name'] }}</h2>
-
-            @foreach($category['sub_categories'] as $subCategory)
-                <div class="sub-category">
-                    <h3 class="fs-5 fw-bold">{{ $subCategory['name'] }}</h3>
-
-                    <!-- Hiển thị sách theo hàng ngang, mỗi hàng tối đa 5 ảnh -->
-                    <div class="d-flex book-container">
-                        <div class="books mb-5 mt-1" >
-                            @foreach($subCategory['books'] as $book)
-                                <div class="card cardx">
-                                 <img style="" src="{{ asset('storage/'.$book['images']) }}" class="card-img-top img-fluid" alt="{{ $book['title'] }}">
-
-                                    <div class="card-body">
-                                        <h6 class="card-title">{{ $book['title'] }}</h6>
-                                        <p class="">{{ $book['price'] }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+    <div class="card-view-content" style="display:block;">
+        @foreach($categories as $category)
+            <!-- Hiển thị tên Category -->
+            <div class="row mb-4">
+                <div class="col-12 type-param mb-3"><a class="h6" href="">Trang chủ /</a></div>
+                <div class="col-12">
+                    <h4 class="">{{ $category['name'] }}</h4>
+                </div>
+            </div>
+            
+            @foreach($category['subCategories'] as $subCategory)
+                <!-- Hiển thị tên SubCategory -->
+                <div class="row m-1 mb-4 mt-4">
+                    <div class="col-4 d-flex justify-content-between align-items-center category-container">
+                        <h6 class="category-name">{{ $subCategory['name'] }}</h6>
+                        <a href="" class="btn btn-sm view-more">Xem Thêm</a>
                     </div>
+                </div>
 
+
+                <!-- Hiển thị danh sách sách trong SubCategory -->
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
+                    @foreach($subCategory['books'] as $book)
+                        <div class="col">
+                            <div class="card h-100 rotating-border">
+                                <div class="card-img-container card-cimg">
+                                    <img style="height: 200px" src="{{ asset('storage/'.$book['images']) }}" class="card-img-top" alt="Ảnh sách">
+                                </div>
+                                <div class="card-body mb-5">
+                                    <!-- Tiêu đề sách -->
+                                    <h6 class="card-title">{{ $book['title'] }}</h6>
+                                    <p class="card-text">{{ $book['author'] }}</p>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <span class="text-danger">{{ $book['price'] }} đ</span>
+                                    <a href="{{ route('books.admin.detailView', ['id' => $book['id']]) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             @endforeach
-        </div>
-    @endforeach
-</div>
-
-<div class="container">
-    <!-- Nội dung với hiệu ứng AOS -->
-    <h2 class="text-center text-type-2 m-5" data-aos="fade-up">Sản phẩm & Dịch vụ của chúng tôi</h2>
-    <p data-aos="fade-up" data-aos-delay="300">
-        Ấn tượng, khác biệt và chuyên nghiệp là những đặc điểm ưu việt khi thiết kế website. Mỗi sản phẩm chúng tôi tạo ra cho khách hàng là cả một công trình nghệ thuật.
-    </p>
-    <div class="row">
-        <div class="col-md-3 mb-4 d-flex">
-            <div style="background-color: #74a2a7;" class="text-black d-flex flex-column justify-content-center align-items-center square w-100" data-aos="fade-up" data-aos-delay="500">
-                <i class="fas fa-book-open fa-3x m-3 mb-0"></i>
-                <h5 class="text-center">Books</h5>
-                <p class="text-center">Khám phá kho sách phong phú với nhiều thể loại hấp dẫn. Mua sắm dễ dàng và nhận sách ngay tại nhà chỉ với vài thao tác đơn giản.</p>
-            </div>
-        </div>
-        
-        <div class="col-md-3 mb-4 d-flex">
-            <div style="background-color: #c36161;" class="text-black d-flex flex-column justify-content-center align-items-center square w-100" data-aos="fade-up" data-aos-delay="600">
-                <i class="fas fa-paint-brush fa-3x m-3 mb-1"></i>
-                <h5 class="text-center">Graphic Design</h5>
-                <p class="text-center">Chúng tôi có khả năng thiết kế đẹp và tiện lợi mẫu trên cả trang web và di động.</p>
-            </div>
-        </div>
-
-        <div class="col-md-3 mb-4 d-flex">
-            <div style="background-color: #ffc107;" class="text-black d-flex flex-column justify-content-center align-items-center square w-100" data-aos="fade-up" data-aos-delay="700">
-                <i class="fas fa-laptop-code fa-3x m-3 mb-1"></i>
-                <h5 class="text-center">Website</h5>
-                <p class="text-center">
-                    Ấn tượng, khác biệt và chuyên nghiệp khi thiết kế website, mỗi sản phẩm tạo ra cho khách hàng là cả một công trình nghệ thuật.
-                </p>
-            </div>
-        </div>
-        
-        <div class="col-md-3 mb-4 d-flex">
-            <div style="background-color: #73ecff;" class="text-black d-flex flex-column justify-content-center align-items-center square w-100" data-aos="fade-up" data-aos-delay="800">
-                <i class="fas fa-bullhorn fa-3x m-3 mb-1"></i>
-                <h5 class="text-center">Marketing</h5>
-                <p class="text-center">Chiến lược marketing sáng tạo để giúp thương hiệu của bạn nổi bật và tiếp cận khách hàng tiềm năng hiệu quả.</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 
-<!-- JavaScript để điều khiển hiệu ứng -->
+<div class="container">
+    <!-- Tiêu đề -->
+    <div class="text-type-2 mt-5 mb-5">
+        <h2 class="text-center p-2" data-aos="fade-up">Danh sách sản phẩm</h2>
+        <p class="text" data-aos="fade-up">
+            Dù bạn yêu thích tiểu thuyết lãng mạn, khoa học viễn tưởng, hay những cuốn sách về phát triển bản thân, bạn đều có thể tìm thấy niềm đam mê và sự thỏa mãn trong từng trang sách. Hãy để sách là nguồn cảm hứng, mở rộng tầm nhìn và làm phong phú thêm cuộc sống của bạn.
+        </p>
+    </div>
+
+    <div class="row">
+        @foreach($simpleCategories as $category)
+        <div class="col-md-4 mb-4">
+            <!-- Thêm thẻ <a> bao quanh mỗi card category -->
+            <a href="{{ url('app/books?category_id=' . $category['id']) }}" class="text-decoration-none text-black">
+                <div class="type-list-card d-flex flex-column align-items-center border p-3 bg-white rounded" style="height: 180px;">
+                    <div class="row w-100 h-100">
+                        <!-- Tên Category -->
+                        <div class="col-7 d-flex align-items-center justify-content-center">
+                            <h5 class="text-center">{{ $category['name'] }}</h5>
+                        </div>
+
+                        <!-- Các hình ảnh chồng lên nhau -->
+                        <div class="border col-5 d-flex align-items-center justify-content-center position-relative" style="height: 120px;">
+                            <!-- Ảnh 1: Xoay lệch 20 độ (Kiểm tra nếu tồn tại ảnh 0) -->
+                            @if(isset($category['images'][0]))
+                                <img 
+                                    src="storage/{{ $category['images'][0] }}" 
+                                    alt="Hình ảnh 1" 
+                                    class="img-fluid rounded image-rotate-left"
+                                    style="position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-20deg); z-index: 1; height: 120px; object-fit: cover;">
+                            @endif
+                            
+                            <!-- Ảnh 2: Mặt định (Kiểm tra nếu tồn tại ảnh 1) -->
+                            @if(isset($category['images'][1]))
+                                <img 
+                                    src="storage/{{ $category['images'][1] }}" 
+                                    alt="Hình ảnh 2" 
+                                    class="img-fluid rounded"
+                                    style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 2; height: 120px; object-fit: cover;">
+                            @endif
+                            
+                            <!-- Ảnh 3: Xoay lệch 20 độ (Kiểm tra nếu tồn tại ảnh 2) -->
+                            @if(isset($category['images'][2]))
+                                <img 
+                                    src="storage/{{ $category['images'][2] }}" 
+                                    alt="Hình ảnh 3" 
+                                    class="img-fluid rounded image-rotate-right"
+                                    style="position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(20deg); z-index: 3; height: 120px; object-fit: cover;">
+                            @endif
+                        </div>
+
+                        <!-- Subcategories -->
+                        <div class="col-12 d-flex align-items-center justify-content-center subcategory-text">
+                            <marquee direction="left" scrollamount="5" scrolldelay="100">
+                                <p class="text-danger" style="font-size: 14px;">{{ $category['subCategories'] }}</p>
+                            </marquee>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
+
+</div>
+
 
 @endsection

@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\App\HomeController;
+use App\Http\Controllers\App\ABookController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
+
 Route::prefix('admin')->middleware('check.admin')->group(function () {
     // Route để hiển thị form thêm sách
     Route::get('addbook', [BookController::class, 'create'])->name('admin.addbook');

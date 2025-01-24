@@ -39,46 +39,73 @@ class HomeController extends Controller
 
 
 
-    public function index()
-    {
+public function index()
+{
+    // Lấy tất cả các category cùng với subcategories và sách
+    $categories = Category::with(['subCategories.books'])->get();
 
-        $categories = Category::with(['subCategories.books' => function ($query) {
-            $query->limit(10); // Lấy tối đa 10 sách cho mỗi subCategory
-        }])->get();
+    // Mảng chính: Dữ liệu chi tiết cho các category
+    $data = $categories->filter(function ($category) {
+        // Lọc các category có ít nhất một subcategory có sách
+        return $category->subCategories->contains(function ($subCategory) {
+            return $subCategory->books->count() > 0;
+        });
+    })->map(function ($category) {
+        return [
+            'id' => $category->id,
+            'name' => $category->name,
+            'subCategories' => $category->subCategories->filter(function ($subCategory) {
+                // Lọc subcategory có ít nhất một sách
+                return $subCategory->books->count() > 0;
+            })->map(function ($subCategory) {
+                return [
+                    'id' => $subCategory->id,
+                    'name' => $subCategory->name,
+                    'books' => $subCategory->books->map(function ($book) {
+                        return [
+                            'id' => $book->id,
+                            'title' => $book->title,
+                            'images' => $book->images ?? 'images/books/default.png',
+                            'price' => $book->price,
+                            'author' => $book->author,
+                        ];
+                    }),
+                ];
+            })->values(), // Reset lại key cho mảng
+        ];
+    })->values(); // Reset lại key cho mảng
 
-        // Chuyển đổi dữ liệu để truyền vào view, chỉ lấy category và subcategory có sách
-        $mergedCategories = $categories->map(function ($category) {
-            $categoryData = [
-                'id' => $category->id,
-                'name' => $category->name,
-                'sub_categories' => $category->subCategories->filter(function ($subCategory) {
-                    // Kiểm tra xem SubCategory có sách hay không
-                    return $subCategory->books->count() > 0;
-                })->map(function ($subCategory) {
-                    return [
-                        'id' => $subCategory->id,
-                        'name' => $subCategory->name,
-                        'books' => $subCategory->books->map(function ($book) {
-                            return [
-                                'id' => $book->id,
-                                'title' => $book->title,
-                                'images'=> $book->images,
-                                'price' => $book->price,
-                            ];
-                        }),
-                    ];
-                }),
-            ];
+    // Mảng phụ: Chỉ gồm tên category, subcategories nối với dấu "." và lấy 3 hình ảnh sách
+    $simpleData = $categories->map(function ($category) {
+        // Lấy tất cả các subCategories và nối tên lại bằng dấu " . "
+        $subCategoryNames = $category->subCategories->pluck('name')->join('. ');
 
-            // Nếu không có subcategory có sách, thì loại bỏ category
-            return $categoryData['sub_categories']->isEmpty() ? null : $categoryData;
-        })->filter(); // Loại bỏ những category không có subcategory nào có sách
+        // Lấy 3 hình ảnh từ sách (mỗi subcategory lấy tối đa 3 hình ảnh)
+        $images = $category->subCategories
+            ->flatMap(function ($subCategory) {
+                return $subCategory->books->take(3)->pluck('images'); // Lấy tối đa 3 ảnh cho mỗi subcategory
+            })
+            ->unique() // Loại bỏ hình ảnh trùng lặp
+            ->values(); // Reset lại key cho mảng
 
-        return view('pages.home', [
-            'categories' => $mergedCategories,
+        return [
+            'name' => $category->name,
+            'id'=>  $category->id,
+            'subCategories' => $subCategoryNames, // Nối các subCategory lại
+            'images' => $images->take(3)->all() ?? ['images/books/default.png'], // Lấy 3 ảnh đầu tiên (nếu có)
+        ];
+    })->filter(function ($item) {
+        // Loại bỏ category không có sách
+        return !is_null($item['images']);
+    })->values(); // Reset lại key cho mảng
 
-        ]);
-    }
+    // Truyền cả 2 mảng ra view
+    return view('pages.home', [
+        'categories' => $data,      // Mảng đầy đủ chi tiết
+        'simpleCategories' => $simpleData, // Mảng đơn giản chỉ có tên, subcategories và hình ảnh
+    ]);
+}
+
 
 
 }

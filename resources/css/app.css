@@ -5,7 +5,7 @@
     font-weight: 400;
 }
 .text-type-2 {
-    color: #7c7777; /* Màu chữ mặc định */
+    color: #545454; /* Màu chữ mặc định */
     font-weight:400;
 }
 
@@ -221,8 +221,9 @@ ul, ol {
     padding: 0; /* Xóa padding mặc định */
 }
 .sidebar {
+    z-index: 10; /* Đặt giá trị z-index cao để ưu tiên hiển thị */
     position: fixed; /* Sidebar cố định ở bên trái */
-    top: 0;
+    top: 200;
     left: 10;
     height: 100vh; /* Chiều cao toàn bộ màn hình */
     background-color: #fff; /* Màu nền trắng */
@@ -466,6 +467,7 @@ ul, ol {
 .card-view-content {
     display: none;
 }
+
 /* Viền khi chọn icon */
 .border-selected {
     border: 2px solid #007bff; /* Màu xanh dương khi chọn */
@@ -476,6 +478,7 @@ ul, ol {
 button.btn {
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card-title {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* Giới hạn tên sách hiển thị tối đa 2 dòng */
@@ -497,10 +500,7 @@ button.btn {
     align-items: center;
 }
 
-
-
-
-
+/* Điều chỉnh diện mạo hình ảnh card */
 .card-img-container {
     position: relative;
     width: 100%;
@@ -512,6 +512,7 @@ button.btn {
     perspective: 1000px; /* Tạo chiều sâu cho không gian 3D */
 }
 
+/* Tăng cường hiệu ứng hình ảnh với chuyển động */
 .card-cimg {
     object-fit: cover;
     border-radius: 10px;
@@ -524,69 +525,182 @@ button.btn {
 .card-cimg:hover {
     transform: rotateY(45deg); /* Xoay ảnh 45 độ theo chiều dọc */
     box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.4); /* Bóng đổ chỉ xuất hiện ở bên trái khi hover */
-
 }
+
+/* Hiển thị tên category và subcategory */
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.subcategory-title {
+    font-size: 1.2rem;
+    margin-left: 20px;
+    color: #6c757d;
+}
+
+
 .text-weight-1 {
     font-weight: 600;
 }
 
 
- .circle-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px; /* Đường kính của vòng tròn */
-        height: 40px;
-        border: 1px solid var(--bs-primary); /* Viền màu xanh primary */
-        border-radius: 50%; /* Làm cho nó thành hình tròn */
-        text-align: center;
-    }
-
-    .circle-icon i {
-        font-size: 18px; /* Kích thước biểu tượng */
-        color: var(--bs-primary); /* Màu của biểu tượng */
-    }
-    .url {
-    color: #808080;  /* Màu đen nhạt */
-    text-decoration: none;  /* Bỏ gạch dưới */
-    font-size: 16px;
-    }
-
-    .url:hover {
-        color: #007bff;  /* Màu xanh khi hover */
-    }
-
-/* Cấu trúc chung của book-container */
-.book-container {
-    width: 100%;
-    overflow: hidden;  /* Ẩn thanh cuộn */
-    cursor: grab;  /* Thay đổi con trỏ khi kéo */
-    transition: border 0.3s ease;  /* Thêm hiệu ứng khi border thay đổi */
-}
-
-
-
-/* Cấu trúc sách bên trong book-container */
-.books {
+.circle-icon {
     display: flex;
-    transition: transform 0.3s ease;  /* Thêm hiệu ứng mượt mà khi di chuyển */
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Đường kính của vòng tròn */
+    height: 40px;
+    border: 1px solid var(--bs-primary); /* Viền màu xanh primary */
+    border-radius: 50%; /* Làm cho nó thành hình tròn */
+    text-align: center;
 }
 
-/* Cấu trúc mỗi thẻ card */
-.cardx {
-    flex: 0 0 17%;
-    margin-right: 32px;  /* Khoảng cách giữa các thẻ card */
-    user-select: none;  /* Ngăn việc tô đen văn bản khi di chuột vào card */
-    transition: box-shadow 0.3s ease;  /* Thêm hiệu ứng mượt mà khi thay đổi box-shadow */
+.circle-icon i {
+    font-size: 18px; /* Kích thước biểu tượng */
+    color: var(--bs-primary); /* Màu của biểu tượng */
 }
 
-/* Khi hover vào thẻ card */
-.cardx:hover {
-    box-shadow: 0 0 10px var(--bs-primary);  /* Áp dụng hiệu ứng sáng lên với màu primary */
+
+/* Định nghĩa hiệu ứng quay */
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
-/* Ảnh trong thẻ card */
-.cardx img {
+/* Cấu hình cho card */
+.rotating-border {
+  --border-radius: 1rem; /* Bán kính bo góc */
+  --border-size: 0.5rem; /* Độ dày viền */
+  --border-bg: conic-gradient(#c33c9e, blue, white);
+
+
+
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  padding: calc(var(--padding) + var(--border-size));
+  border-radius: var(--border-radius);
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho card */
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng khi hover */
+  height: 100%; /* Đảm bảo thẻ có chiều cao đầy đủ */
+  width: 100%; /* Đảm bảo thẻ có chiều rộng đầy đủ */
+}
+
+/* Viền quay khi hover */
+.rotating-border:hover {
+  transform: scale(1.1); /* Phóng to một chút khi hover */
+}
+
+.rotating-border::before {
+  content: '';
+  display: block;
+  background: var(--border-bg);
+  width: 300%; /* Phóng to lên 300% */
+  height: 300%; /* Phóng to lên 300% */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(0);
+  z-index: -2;
+  animation: spin 3s linear infinite; /* Thời gian và kiểu lặp của hiệu ứng */
+}
+
+.rotating-border::after {
+  content: '';
+  position: absolute;
+  inset: var(--border-size);
+  background: white; /* Màu nền bên trong viền */
+  z-index: -1;
+  border-radius: calc(var(--border-radius) - var(--border-size));
+}
+
+
+/* Cấu hình cho phần tử category-container */
+.category-container {
+    display: flex;
+    background: linear-gradient(to right, #efefef 65%, #ff6c03 35%);
+    clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 0% 100%);
+    transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng hover cho category-container */
+.category-container:hover {
+    background: linear-gradient(to right, #efefef 65%, #e65c00 35%); /* Màu cam đậm hơn khi hover */
+}
+
+/* Cấu hình cho nút "Xem Thêm" */
+.view-more {
+    padding: 0.375rem 0.75rem;
+    color: white; /* Màu chữ trắng */
+    background-color: #ff6c03; /* Màu nền cam */
+    border: none; /* Bỏ viền */
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+/* Hiệu ứng hover cho nút "Xem Thêm" */
+.view-more:hover {
+    background-color: #e65100; /* Màu cam đậm hơn khi hover */
+    color: white; /* Giữ màu chữ trắng khi hover */
+    font-weight: 500;
+}
+
+/* Hiệu ứng focus khi nhấn nút */
+.view-more:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: #ff6c03; /* Giữ màu nền khi focus */
+    color: white;
+}
+
+.type-list-card {
+    transition: transform 0.2s ease-in-out; /* Hiệu ứng di chuyển mượt mà */
+}
+
+.type-list-card:hover {
+    transform: translateY(-8px); /* Khi hover, khối sẽ nhấc lên một chút */
+}
+
+
+
+.marquee {
     width: 100%;
-    height: auto;  /* Đảm bảo ảnh hiển thị đúng tỉ lệ */
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 500px;
+}
+
+.marquee::before {
+    content: attr(data-text);
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.image-rotate-left {
+    transform: rotate(-20deg);
+}
+
+.image-rotate-right {
+    transform: rotate(20deg);
+}
+
+.image-default {
+    transform: rotate(0deg);
 }
