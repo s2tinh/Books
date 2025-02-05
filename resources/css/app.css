@@ -704,3 +704,40 @@ button.btn {
 .image-default {
     transform: rotate(0deg);
 }
+
+.sticky-header {
+    position: sticky;
+    top: 0; /* Khoảng cách từ phần trên của cửa sổ */
+    z-index: 10; /* Đảm bảo nó luôn nằm trên các phần khác */
+    background-color: #f8f9fa; /* Giữ màu nền đồng bộ */
+    padding: 5px; /* Thêm khoảng cách để đẹp hơn */
+}
+.header {
+    display: flex;
+    justify-content: space-between; /* Đưa tiêu đề về bên trái, icon về bên phải */
+    align-items: center;
+}
+
+.icon-sidebar {
+    margin: 0;
+}
+
+#arrow-icon, #arrow-icon-author {
+    cursor: pointer;
+}
+.noUi-handle.noUi-handle-upper {
+    height: 20px !important;
+    width: 20px !important;
+}
+.noUi-handle.noUi-handle-lower{
+    height: 20px !important;
+    width: 20px !important;
+}
+
+#sidebarx {
+    height: 520px; /* Khống chế chiều cao cho sidebar */
+    overflow-y: auto; /* Cho phép cuộn dọc khi nội dung vượt quá chiều cao */
+    border: 1px solid #ddd; /* Thêm viền cho div */
+    padding: 10px; /* Khoảng cách bên trong */
+}
+

@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\WebhookController;
 
 Route::prefix('admin')->middleware('check.admin')->group(function () {
     // Route để hiển thị form thêm sách
@@ -71,3 +72,4 @@ Route::prefix('app')->group(function(){
 
 
 
+Route::get('/webhooks', [WebhookController::class, 'handleWebhook']);

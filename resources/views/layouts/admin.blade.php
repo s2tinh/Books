@@ -6,9 +6,9 @@
     <title>@yield('title', 'Admin Panel')</title>
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    
     <!-- Sử dụng Vite để kết nối tài nguyên -->
     @vite(['resources/css/admin.css', 'resources/js/app.js'])
+
 </head>
 <body style="background-color: #384c601f;">
     <!-- Gọi phần header từ file con -->

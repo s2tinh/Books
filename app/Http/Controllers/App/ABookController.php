@@ -16,10 +16,21 @@ public function listView(Request $request)
 {
     // Lấy tham số từ URL
     $categoryId = $request->query('category_id');
+    $bookss = Book::select('id', 'author', 'cover_type', 'book_size', 'publisher')->get();  // ds cho filler sidebar
+    $arrbooks = $bookss->map(function ($book) {
+        return [
+            'id' => $book->id,
+            'author' => strtoupper($book->author),
+            'cover_type' => ucfirst($book->cover_type),
+            'book_size' => $book->book_size,
+            'publisher' => $book->publisher,
+        ];
+    })->unique('publisher'); // Loại bỏ phần tử trùng lặp theo publisher
+
+
 
     // Lấy tất cả các category cùng với subcategories và sách
     $categories = Category::with(['subCategories.books'])->get();
-
     // Nếu có tham số category_id, lọc chỉ lấy category đó
     if ($categoryId) {
         $categories = $categories->where('id', $categoryId);
@@ -84,6 +95,8 @@ public function listView(Request $request)
     return view('books.app.listView',  [
         'categories' => $data,      // Mảng đầy đủ chi tiết
         'simpleCategories' => $simpleData, // Mảng đơn giản chỉ có tên, subcategories và hình ảnh
+        'arrbooks'=> $arrbooks
+
     ]);
 }
 

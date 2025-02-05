@@ -174,3 +174,56 @@ window.addEventListener("wheel", function(event) {
     }
 });
 
+// JavaScript cho Publisher
+document.getElementById('toggle-header').addEventListener('click', function () {
+    var checkboxContent = document.getElementById('checkbox-content');
+    var arrowIcon = document.getElementById('arrow-icon');
+    var publisherDiv = document.getElementById('div-publisher'); // Thêm vào để thay đổi chiều cao
+
+    // Kiểm tra trạng thái hiện tại và thay đổi
+    if (checkboxContent.style.display === 'none') {
+        checkboxContent.style.display = 'block'; // Hiển thị lại phần checkbox
+        arrowIcon.classList.remove('open'); // Đổi icon về trạng thái mở
+        publisherDiv.style.height = '200px'; // Đặt lại chiều cao khi hiển thị checkbox
+    } else {
+        checkboxContent.style.display = 'none'; // Ẩn phần checkbox
+        arrowIcon.classList.add('open'); // Đổi icon thành đóng
+        publisherDiv.style.height = '37px'; // Đặt chiều cao khi ẩn checkbox
+    }
+});
+
+// JavaScript cho Author
+document.getElementById('toggle-header-author').addEventListener('click', function () {
+    var checkboxContentAuthor = document.getElementById('checkbox-content-author');
+    var arrowIconAuthor = document.getElementById('arrow-icon-author');
+    var authorDiv = document.getElementById('div-author'); // Thêm vào để thay đổi chiều cao
+
+    // Kiểm tra trạng thái hiện tại và thay đổi
+    if (checkboxContentAuthor.style.display === 'none') {
+        checkboxContentAuthor.style.display = 'block'; // Hiển thị lại phần checkbox
+        arrowIconAuthor.classList.remove('open'); // Đổi icon về trạng thái mở
+        authorDiv.style.height = '200px'; // Đặt lại chiều cao khi hiển thị checkbox
+    } else {
+        checkboxContentAuthor.style.display = 'none'; // Ẩn phần checkbox
+        arrowIconAuthor.classList.add('open'); // Đổi icon thành đóng
+        authorDiv.style.height = '37px'; // Đặt chiều cao khi ẩn checkbox
+    }
+});
+// JavaScript cho Price
+document.getElementById('toggle-price').addEventListener('click', function () {
+    var priceContent = document.getElementById('price-content'); // Nội dung phần giá
+    var arrowIconPrice = document.getElementById('arrow-icon-price'); // Icon mũi tên
+    var priceContainer = document.getElementById('price-container'); // Phần div chứa cả khối
+
+    // Kiểm tra trạng thái hiện tại
+    if (priceContent.style.display === 'none' || priceContent.style.display === '') {
+        priceContent.style.display = 'block'; // Hiển thị lại nội dung
+        arrowIconPrice.classList.remove('open'); // Icon mũi tên mở
+        priceContainer.style.height = '130px'; // Đặt chiều cao cho khối
+    } else {
+        priceContent.style.display = 'none'; // Ẩn nội dung
+        arrowIconPrice.classList.add('open'); // Icon mũi tên đóng
+        priceContainer.style.height = '37px'; // Thu nhỏ chiều cao
+    }
+});
+
