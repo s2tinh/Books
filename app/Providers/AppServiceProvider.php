@@ -20,7 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       
+        // Chuyển tất cả URL thành HTTPS khi ứng dụng chạy trên môi trường sản xuất
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
-
 }
