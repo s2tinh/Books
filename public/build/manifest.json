@@ -39,6 +39,11 @@
     "file": "assets/bootstrap-icons-BtvjY1KL.woff2",
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
+  "resources/css/admin.css": {
+    "file": "assets/admin-CnGD2Fu2.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true
+  },
   "resources/css/app.css": {
     "file": "assets/app-BeKd0KoT.css",
     "src": "resources/css/app.css",
