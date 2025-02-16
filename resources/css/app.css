@@ -352,7 +352,7 @@ ul, ol {
 
     color: black;
     position: absolute; /* Đặt vị trí tuyệt đối */
-    top: 80%; /* Hiển thị ngay bên dưới navbar */
+    top: ; /* Hiển thị ngay bên dưới navbar */
     left: 0;
     width: 100%; /* Chiếm toàn bộ chiều ngang */
     background-color: rgba(255, 255, 255, 0.9);
