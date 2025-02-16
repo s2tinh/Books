@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <span class="text-danger">{{ $book['price'] }} đ</span>
-                                    <a href="{{ route('books.admin.detailView', ['id' => $book['id']]) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('books.app.detailView', ['id' => $book['id']]) }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </div>
