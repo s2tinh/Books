@@ -15,51 +15,72 @@
 
                 <!-- Navbar links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="row w-100">
+                    <div class="row w-100 d-lg-none flex-column"> 
+                        <!-- Chỉ áp dụng layout này cho mobile -->
+                        <div class="search-box mb-3">
+                            <form action="/search" method="GET" class="d-flex">
+                                <input type="text" name="query" class="form-control" placeholder="Tìm kiếm..." style="border: 1px solid #ddd; border-radius: 30px; padding: 0.5rem 1rem; width: 100%;">
+                                <button type="submit" class="btn btn-primary ms-2" style="border-radius: 30px;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Hàng ngang chứa Danh mục - Quản lý - Giỏ hàng (chỉ hiện trên mobile) -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Danh mục -->
+                            <button id="toggle-category" class="btn btn-c border d-flex align-items-center text-black">
+                                <i class="fas fa-list me-2"></i>
+                                <span>Danh mục</span>
+                                <i id="category-icon" class="fas fa-chevron-down ms-2"></i>
+                            </button>
+
+                            <!-- Quản lý (chỉ hiển thị nếu có quyền) -->
+                            @if(auth()->user() && (auth()->user()->hasRole('admin') || auth()->user()->can('manage_users')))
+                            <div class="dropdown">
+                                <button class="btn btn-light border dropdown-toggle" type="button" id="navbarDropdownAdmin" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i> Quản lý
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                    <li><a class="dropdown-item" href="/admin">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="/admin/settings">Cài đặt hệ thống</a></li>
+                                </ul>
+                            </div>
+                            @endif
+
+                            <!-- Giỏ hàng -->
+                            <a class="btn btn-light border circle-icon" href="/gio-hang">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Giao diện Desktop (không thay đổi) -->
+                    <div class="row w-100 d-none d-lg-flex">
                         <!-- Danh mục -->
-              <div class="col-md-3 d-flex align-items-center">
-                <button id="toggle-category" class="btn btn-c border d-flex align-items-center text-black">
-                    <i class="fas fa-list me-2"></i>
-                    <span>Danh mục</span>
-                    <i id="category-icon" class="fas fa-chevron-down ms-2"></i>
-                </button>
-            </div>
+                        <div class="col-md-3 d-flex align-items-center">
+                            <button id="toggle-category" class="btn btn-c border d-flex align-items-center text-black">
+                                <i class="fas fa-list me-2"></i>
+                                <span>Danh mục</span>
+                                <i id="category-icon" class="fas fa-chevron-down ms-2"></i>
+                            </button>
+                        </div>
 
                         <!-- Tìm kiếm -->
-            <div class="col-md-4 text-center">
-                <div class="search-box">
-                    <form action="/search" method="GET" class="d-flex">
-                        <input type="text" name="query" class="form-control" placeholder="Tìm kiếm..." style="border: 1px solid #ddd; border-radius: 30px; padding: 0.5rem 1rem; width: 100%;">
-                        <button type="submit" class="btn btn-primary ms-2" style="border-radius: 30px;">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
+                        <div class="col-md-4 text-center">
+                            <div class="search-box">
+                                <form action="/search" method="GET" class="d-flex">
+                                    <input type="text" name="query" class="form-control" placeholder="Tìm kiếm..." style="border: 1px solid #ddd; border-radius: 30px; padding: 0.5rem 1rem; width: 100%;">
+                                    <button type="submit" class="btn btn-primary ms-2" style="border-radius: 30px;">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
                         <!-- Links -->
-            <div class="col-md-5 d-flex justify-content-end" style="padding-right: 0px;">
+                        <div class="col-md-5 d-flex justify-content-end" style="padding-right: 0px;">
                             <ul class="navbar-nav ms-auto">
-              
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dịch vụ
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="/dich-vu/de-xuat">Đề xuất</a></li>
-                                        <li><a class="dropdown-item" href="/dich-vu/khac">Khác</a></li>
-                                        <li><a class="dropdown-item" href="/dich-vu/tu-van">Tư vấn</a></li>
-                                    </ul>
-                                </li>
-
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/tin-tuc">Tin tức</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/gioi-thieu">Giới thiệu</a>
-                                </li>
-  
-
                                 @if(auth()->user() && (auth()->user()->hasRole('admin') || auth()->user()->can('manage_users')))
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,11 +99,13 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </nav>
     </div>
+</div>
+
 
     <!-- Danh mục -->
 <div id="category" class="container-fluid bg-c mt-3">
