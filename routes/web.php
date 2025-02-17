@@ -68,6 +68,7 @@ Route::put('/books/update', [BookController::class, 'update'])->name('books.admi
 
 Route::prefix('app')->group(function(){
     route::get('books/',[ABookController::class, 'listView'])->name('books.app.listView');
+    Route::get('/books/detail', [ABookController::class, 'detailView'])->name('books.app.detailView');
 });
 
 

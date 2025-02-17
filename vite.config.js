@@ -13,12 +13,12 @@ export default defineConfig({
       refresh: true,
     }),
   ],
-  server: {
-    // Đảm bảo sử dụng URL tương thích với môi trường Koyeb
-    host: true,
-    port: 3000, // Chọn cổng nếu cần thiết
-    hmr: {
-      host: 'qualified-lari-atbook-eddb05b3.koyeb.app', // Thay bằng URL của Koyeb
-    },
-  },
+  // server: {
+  //   // Đảm bảo sử dụng URL tương thích với môi trường Koyeb
+  //   host: true,
+  //   port: 3000, // Chọn cổng nếu cần thiết
+  //   hmr: {
+  //     host: 'qualified-lari-atbook-eddb05b3.koyeb.app', // Thay bằng URL của Koyeb
+  //   },
+  // },
 });
