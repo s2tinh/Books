@@ -94,7 +94,7 @@
 /* Khung chứa mũi tên */
 .carousel-control-prev, .carousel-control-next {
     position: absolute;
-    top: 30%; /* Đặt mũi tên vào giữa chiều dọc */
+    top: 40%; /* Đặt mũi tên vào giữa chiều dọc */
     transform: translateY(180%); /* Cân đối mũi tên */
     background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối trong suốt */
     color: white; /* Màu mũi tên */
@@ -109,6 +109,21 @@
     width: 60px; /* Thu nhỏ chiều rộng của khung */
     height: 100px; /* Thu nhỏ chiều cao của khung */
     transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+@media (max-width: 768px) {
+    .carousel-control-prev, .carousel-control-next {
+        top: 15% !important; /* Điều chỉnh vị trí mũi tên */
+        width: 30px; /* Thu nhỏ chiều rộng của khung */
+        height: 50px; /* Thu nhỏ chiều cao của khung */
+
+    }
+    .carousel-control-prev {
+        left: 0px; /* Đưa mũi tên trái vào gần hơn */
+    }
+    /* Mũi tên phải */
+    .carousel-control-next {
+        right: 0px; /* Đưa mũi tên phải vào gần hơn */
+    }
 }
 
 /* Mũi tên trái */
@@ -221,16 +236,15 @@ ul, ol {
     padding: 0; /* Xóa padding mặc định */
 }
 .sidebar {
-    z-index: 10; /* Đặt giá trị z-index cao để ưu tiên hiển thị */
+    top: 0px;
+    z-index: 9998; /* Đặt giá trị z-index cao để ưu tiên hiển thị */
     position: fixed; /* Sidebar cố định ở bên trái */
-    top: 200;
-    left: 10;
+    left: 10px; /* Đảm bảo có đơn vị px */
     height: 100vh; /* Chiều cao toàn bộ màn hình */
     background-color: #fff; /* Màu nền trắng */
 
-    overflow-y: auto;  /* Thêm thanh cuộn dọc khi nội dung tràn */
+    overflow-y: auto; /* Thêm thanh cuộn dọc khi nội dung tràn */
     overflow-x: hidden; /* Ẩn thanh cuộn ngang nếu không cần thiết */
-
 }
 
 .sidebar a {
@@ -239,7 +253,7 @@ ul, ol {
 }
 /* Kiểu sidebar khi đang mở rộng */
 .sidebar {
-    width: 230px; /* Chiều rộng ban đầu của sidebar */
+    width: 300px; /* Chiều rộng ban đầu của sidebar */
     transition: width 1s ease; /* Thêm hiệu ứng chuyển đổi khi thay đổi width */
     overflow: hidden; /* Ẩn phần nội dung khi thu nhỏ */
 }
@@ -261,7 +275,7 @@ ul, ol {
 }
 /* Đặt độ rộng mặc định của content-admin */
 #content-admin {
-    width: 80%;  /* Độ rộng mặc định khi sidebar mở */
+    width: 100%;  /* Độ rộng mặc định khi sidebar mở */
     transition: width 1s ease;  /* Thêm hiệu ứng chuyển đổi khi thay đổi độ rộng */
 }
 /* Tùy chỉnh màu nền cho các input */
@@ -735,9 +749,77 @@ button.btn {
 }
 
 #sidebarx {
-    height: 520px; /* Khống chế chiều cao cho sidebar */
+    height: 620px; /* Khống chế chiều cao cho sidebar */
     overflow-y: auto; /* Cho phép cuộn dọc khi nội dung vượt quá chiều cao */
     border: 1px solid #ddd; /* Thêm viền cho div */
     padding: 10px; /* Khoảng cách bên trong */
+    z-index: 9998; /* Đảm bảo icon nằm trên tất cả các phần tử khác */
+
+}
+    .logo {
+        width: 60px; /* Mặc định là 60px cho màn hình PC */
+    }
+
+    @media (max-width: 768px) {
+        .logo {
+            width: 40px; /* Đối với màn hình nhỏ (mobile), set width là 40px */
+        }
+    }
+
+    #toggle-sidebar {
+    position: fixed;
+    top: 150px; /* Điều chỉnh vị trí theo nhu cầu */
+    right: 10px;
+    z-index: 9997;
+}
+@keyframes pulseEffect {
+    0% { background-color: #66b3ff; transform: scale(1); } /* Xanh nhạt, kích thước bình thường */
+    50% { background-color: #007bff; transform: scale(1.1); } /* Xanh trung bình, lớn hơn 4px */
+    100% { background-color: #004085; transform: scale(1); } /* Xanh đậm, quay về kích thước ban đầu */
 }
 
+#toggle-sidebar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white; /* Viền trắng */
+    border-radius: 50%;
+    cursor: pointer;
+    animation: pulseEffect 2s infinite alternate; /* Hiệu ứng màu + kích thước */
+}
+
+#toggle-icon {
+    color: white;
+}
+/* Dropdown mặc định ẩn */
+#userDropdownMenu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Đưa dropdown xuống dưới phần tử cha */
+    left: 0;
+    background-color: #fff; /* Nền trắng */
+    color: darkblue !important; /* Màu chữ xanh dương */
+    z-index: 1050; /* Đảm bảo dropdown hiển thị trên các phần tử khác */
+    width: 100%; /* Đảm bảo độ rộng của dropdown như phần tử cha */
+}
+
+#userDropdownMenu .dropdown-item {
+    color: darkblue !important; /* Đảm bảo màu chữ xanh dương cho các item */
+}
+
+#userDropdownMenu .dropdown-item:hover {
+    background-color: #f8f9fa; /* Màu nền sáng hơn khi hover */
+    color: darkblue !important; /* Màu chữ tối hơn khi hover */
+    font-weight: 700; /* Làm chữ đậm khi hover */
+}
+/* Vô hiệu hóa tất cả class .controller trên màn hình điện thoại */
+@media (max-width: 768px) {
+    .controller {
+        pointer-events: none; /* Vô hiệu hóa tương tác */
+        opacity: 0.5; /* Làm mờ phần tử để người dùng biết nó bị vô hiệu hóa */
+        visibility: hidden; /* Ẩn phần tử khỏi màn hình */
+        z-index: -1; /* Đưa phần tử xuống dưới để không che khuất các phần tử khác */
+    }
+}

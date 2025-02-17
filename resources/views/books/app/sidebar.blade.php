@@ -1,16 +1,98 @@
-<div id="sidebarx" class="border sidebar bg-white p-1">
-  <div class="mt-3 dashboard-block">
+<div id="toggle-sidebar" class="mt-3 dashboard-block">
     <div style="display: flex; align-items: center;">
-        <p id="sidebar-dashboard" class="h6" style="margin-right: 10px;">
-            Search  <i class="fas fa-sync text-primary"></i> <!-- Icon khác -->
-        </p>
-        <i id="toggle-icon" class="fas fa-bars ms-auto toggle-icon border p-2" style="font-size: 17px;"></i> <!-- Icon 3 gạch ngang -->
+        <i id="toggle-icon" class="fas fa-bars ms-auto toggle-icon  p-2" style="font-size: 17px;"></i> <!-- Icon 3 gạch ngang -->
     </div>
-    <hr id="sidebar-hr" style="width: 80%; margin-top: 10px; border: 1px solid #000;">
 </div>
 
+
+<div id="sidebarx" class="border sidebar bg-white p-1">
+
+<!-- Thể loại sách -->
+<div id="category-container" class="container mt-2 bg-white border rounded" style="height: 200px; padding: 0; overflow: hidden;">
+    <!-- Tiêu đề -->
+    <div class="header p-2" style="border-bottom: 1px solid #dee2e6; text-align: left; width: 100%;" id="toggle-category">
+        <h6 class="icon-sidebar m-0 d-inline-block">
+            <i class="fas fa-book"></i> Thể loại sách
+        </h6>
+        <i class="fas fa-chevron-down d-inline-block" id="arrow-icon-category"></i>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="p-2" style="height: calc(100% - 50px); overflow-y: auto;" id="category-content">
+        <form>
+            @foreach($categories2 as $category)
+                <div>
+                    <label style="font-weight: 500;">
+                        <input 
+                            class="m-2 category-checkbox" 
+                            type="checkbox" 
+                            data-category-id="{{ $category['id'] }}" 
+                        >
+                        {{ $category['name'] }}
+                    </label>
+                </div>
+                <!-- Sub-categories container -->
+                <div class="sub-category-container" id="sub-category-{{ $category['id'] }}" style="margin-left: 20px; display: none;">
+                    @foreach($category['sub_categories'] as $subCategory)
+                        <div>
+                            <label>
+                                <input 
+                                    class="m-2" 
+                                    type="checkbox" 
+                                    name="sub_categories[]" 
+                                    value="{{ $subCategory['id'] }}" 
+                                >
+                                {{ $subCategory['name'] }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        </form>
+    </div>
+</div>
+
+<!-- Đối tượng -->
+<div id="target-audience-container" class="container mt-2 bg-white border rounded" style="height: 200px; padding: 0; overflow: hidden;">
+    <!-- Tiêu đề -->
+    <div class="header p-2" style="border-bottom: 1px solid #dee2e6; text-align: left; width: 100%;" id="toggle-target-audience">
+        <h6 class="icon-sidebar m-0 d-inline-block">
+            <i class="fas fa-users"></i> Đối tượng
+        </h6>
+        <i class="fas fa-chevron-down d-inline-block" id="arrow-icon-target-audience"></i>
+    </div>
+    
+    <!-- Nội dung -->
+    <div class="p-2" style="height: calc(100% - 50px); overflow-y: auto;" id="target-audience-content">
+        <form>
+            <!-- Độ tuổi -->
+            <h6 class="text-primary">Độ tuổi</h6>
+            @foreach($ageGroups as $key => $group)
+                <div>
+                    <label>
+                        <input class="m-2" type="checkbox" name="doc_gia[]" value="{{ $key }}"> 
+                        {{ $group }}
+                    </label>
+                </div>
+            @endforeach
+
+            <!-- Ngôn ngữ -->
+            <h6 class="text-primary mt-3">Ngôn ngữ</h6>
+            @foreach($languages as $key => $language)
+                <div>
+                    <label>
+                        <input class="m-2" type="checkbox" name="ngon_ngu[]" value="{{ $key }}"> 
+                        {{ $language }}
+                    </label>
+                </div>
+            @endforeach
+        </form>
+    </div>
+</div>
+
+
     <div class="nav flex-column" id="sidebar-content">
-    <div id="price-container" class="container mt-2 bg-light border rounded" style="height: 130px; padding: 0; overflow: hidden;">
+    <div id="price-container" class="container mt-2 bg-white border rounded" style="height: 130px; padding: 0; overflow: hidden;">
         <!-- Tiêu đề -->
         <div class="header p-2" style="border-bottom: 1px solid #dee2e6; text-align: left; width: 100%;" id="toggle-price">
             <h6 class="icon-sidebar m-0 d-inline-block">
@@ -38,7 +120,7 @@
         </div>
     </div>
 
-<div id="div-publisher" class="container mt-2 bg-light border rounded" style="height: 200px; padding: 0; overflow: hidden;">
+<div id="div-publisher" class="container mt-2 bg-white border rounded" style="height: 200px; padding: 0; overflow: hidden;">
     <!-- Tiêu đề -->
     <div class="header p-2" style="border-bottom: 1px solid #dee2e6; text-align: left; width: 100%;" id="toggle-header">
         <h6 class="icon-sidebar m-0 d-inline-block">
@@ -62,7 +144,7 @@
     </div>
 </div>
 
-<div id="div-author" class="container mt-2 bg-light border rounded" style="height: 200px; padding: 0; overflow: hidden;">
+<div id="div-author" class="container mt-2 bg-white border rounded" style="height: 200px; padding: 0; overflow: hidden;">
     <!-- Tiêu đề -->
     <div class="header p-2" style="border-bottom: 1px solid #dee2e6; text-align: left; width: 100%;" id="toggle-header-author">
         <h6 class="icon-sidebar m-0 d-inline-block">
@@ -85,6 +167,8 @@
         </form>
     </div>
 </div>
+
+
 
     </div>
 </div>

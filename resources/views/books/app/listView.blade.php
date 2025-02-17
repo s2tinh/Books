@@ -4,12 +4,9 @@
 @section('title', 'Books')
 
 @section('content')
-
+@include('books.app.sidebar')
     <div class="d-flex container-fluid">
-
-        @include('books.app.sidebar')
-
-        <main class="flex-grow-1 p-4 ">
+        <main class="flex-grow-1">
             <div id="content-admin" class=" ms-auto">
            <div class="container">
     <div class="card-view-content" style="display:block;">
@@ -38,7 +35,7 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between align-items-center">
                                     <span class="text-danger">{{ $book['price'] }} đ</span>
-                                    <a href="{{ route('books.app.detailView', ['id' => $book['id']]) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('books.admin.detailView', ['id' => $book['id']]) }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </div>
@@ -49,7 +46,7 @@
             </div>
         @endforeach
     </div>
-</div>
+
 <div class="container">
     <!-- Tiêu đề -->
     <div class="text-type-2 mt-5 mb-5">
@@ -120,6 +117,4 @@
             </div>
         </main>
     </div>
-
-
 @endsection

@@ -70,7 +70,7 @@
             @foreach($category['subCategories'] as $subCategory)
                 <!-- Hiển thị tên SubCategory -->
                 <div class="row m-1 mb-4 mt-4">
-                    <div class="col-4 d-flex justify-content-between align-items-center category-container">
+                    <div class="col-sm-4 col-10 d-flex justify-content-between align-items-center category-container">
                         <h6 class="category-name">{{ $subCategory['name'] }}</h6>
                         <a href="" class="btn btn-sm view-more">Xem Thêm</a>
                     </div>

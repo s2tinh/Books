@@ -56,28 +56,21 @@ if(document.getElementById('toggle-icon')){
     document.getElementById('toggle-icon').addEventListener('click', function () {
         // Lấy phần tử có id="sidebar-content", "sidebar-hr", "sidebar-dashboard", "content-admin"
         const sidebarContent = document.getElementById('sidebar-content');
-        const sidebarHr = document.getElementById('sidebar-hr');
-        const sidebarDb = document.getElementById('sidebar-dashboard');
         const contentAdmin = document.getElementById('content-admin');  // Lấy phần tử content-admin
         const icon = document.getElementById('toggle-icon');
         const sidebar = document.querySelector('.sidebar');  // Lấy toàn bộ sidebar
-
         // Thêm hoặc bỏ lớp để ẩn/hiện nội dung của sidebar
         sidebarContent.classList.toggle('sidebar-content-hidden');
-        
         // Ẩn/hiện phần tử có id="sidebar-hr"
-        sidebarHr.classList.toggle('sidebar-content-hidden');
-        sidebarDb.classList.toggle('sidebar-content-hidden');
+
 
         // Thay đổi icon từ 3 gạch ngang thành mũi tên hoặc ngược lại
         if (sidebarContent.classList.contains('sidebar-content-hidden')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-chevron-right');  // Đổi thành mũi tên
-            sidebar.classList.add('sidebar-hidden');  // Thu nhỏ sidebar
 
+            document.getElementById('sidebarx').style.display='none';
             // Thêm lớp "content-a" và thay đổi độ rộng của content-admin khi sidebar đóng
             contentAdmin.classList.add('content-a');
-            contentAdmin.style.width = '96%'; // Đặt độ rộng là 500px
+            contentAdmin.style.width = '100%'; // Đặt độ rộng là 500px
         } else {
             icon.classList.remove('fa-chevron-right');
             icon.classList.add('fa-bars');  // Đổi lại thành 3 gạch ngang
@@ -85,7 +78,8 @@ if(document.getElementById('toggle-icon')){
 
             // Gỡ lớp "content-a" và thay đổi độ rộng của content-admin khi sidebar mở
             contentAdmin.classList.remove('content-a');
-            contentAdmin.style.width = '80%'; // Đặt độ rộng lại là 700px
+            contentAdmin.style.width = '100%'; // Đặt độ rộng lại là 700px
+             document.getElementById('sidebarx').style.display='block';
         }
     });
 }
@@ -163,32 +157,59 @@ if(document.getElementById('category')){
     });
 
 
-window.addEventListener("wheel", function(event) {
-    const sidebar = document.querySelector('.sidebar'); // Lấy sidebar
-    const currentScrollTop = document.documentElement.scrollTop || document.body.scrollTop; // Vị trí cuộn hiện tại
+document.addEventListener('DOMContentLoaded', function () {
+    // Khi trang đã được tải, ẩn các phần tử
+    var checkboxContent = document.getElementById('checkbox-content');
+    var arrowIcon = document.getElementById('arrow-icon');
+    var publisherDiv = document.getElementById('div-publisher');
+    checkboxContent.style.display = 'none';
+    publisherDiv.style.height = '37px'; // Đặt chiều cao khi ẩn checkbox
+    arrowIcon.classList.add('open'); // Đổi icon thành đóng
 
-    if (currentScrollTop >= 100) {
-        sidebar.style.top = '85px'; // Khi cuộn xuống 100px, sidebar sẽ ở vị trí top 85px
-    } else if (currentScrollTop <= 20) {
-        sidebar.style.top = '151px'; // Khi cuộn lên top, sidebar sẽ ở vị trí top 200px
-    }
+    var checkboxContentAuthor = document.getElementById('checkbox-content-author');
+    var arrowIconAuthor = document.getElementById('arrow-icon-author');
+    var authorDiv = document.getElementById('div-author');
+    checkboxContentAuthor.style.display = 'none';
+    authorDiv.style.height = '37px';
+    arrowIconAuthor.classList.add('open');
+
+    var priceContent = document.getElementById('price-content');
+    var arrowIconPrice = document.getElementById('arrow-icon-price');
+    var priceContainer = document.getElementById('price-container');
+    priceContent.style.display = 'none';
+    priceContainer.style.height = '37px';
+    arrowIconPrice.classList.add('open');
+
+    var categoryContent = document.getElementById('category-content');
+    var arrowIconCategory = document.getElementById('arrow-icon-category');
+    var categoryContainer = document.getElementById('category-container');
+    categoryContent.style.display = 'none';
+    categoryContainer.style.height = '37px';
+    arrowIconCategory.classList.add('open');
+
+    var targetAudienceContent = document.getElementById('target-audience-content');
+    var arrowIconTargetAudience = document.getElementById('arrow-icon-target-audience');
+    var targetAudienceContainer = document.getElementById('target-audience-container');
+    targetAudienceContent.style.display = 'none';
+    targetAudienceContainer.style.height = '37px';
+    arrowIconTargetAudience.classList.add('open');
 });
 
 // JavaScript cho Publisher
 document.getElementById('toggle-header').addEventListener('click', function () {
     var checkboxContent = document.getElementById('checkbox-content');
     var arrowIcon = document.getElementById('arrow-icon');
-    var publisherDiv = document.getElementById('div-publisher'); // Thêm vào để thay đổi chiều cao
+    var publisherDiv = document.getElementById('div-publisher'); 
 
     // Kiểm tra trạng thái hiện tại và thay đổi
     if (checkboxContent.style.display === 'none') {
-        checkboxContent.style.display = 'block'; // Hiển thị lại phần checkbox
-        arrowIcon.classList.remove('open'); // Đổi icon về trạng thái mở
-        publisherDiv.style.height = '200px'; // Đặt lại chiều cao khi hiển thị checkbox
+        checkboxContent.style.display = 'block';
+        arrowIcon.classList.remove('open');
+        publisherDiv.style.height = '200px';
     } else {
-        checkboxContent.style.display = 'none'; // Ẩn phần checkbox
-        arrowIcon.classList.add('open'); // Đổi icon thành đóng
-        publisherDiv.style.height = '37px'; // Đặt chiều cao khi ẩn checkbox
+        checkboxContent.style.display = 'none';
+        arrowIcon.classList.add('open');
+        publisherDiv.style.height = '37px';
     }
 });
 
@@ -196,34 +217,67 @@ document.getElementById('toggle-header').addEventListener('click', function () {
 document.getElementById('toggle-header-author').addEventListener('click', function () {
     var checkboxContentAuthor = document.getElementById('checkbox-content-author');
     var arrowIconAuthor = document.getElementById('arrow-icon-author');
-    var authorDiv = document.getElementById('div-author'); // Thêm vào để thay đổi chiều cao
+    var authorDiv = document.getElementById('div-author'); 
 
     // Kiểm tra trạng thái hiện tại và thay đổi
     if (checkboxContentAuthor.style.display === 'none') {
-        checkboxContentAuthor.style.display = 'block'; // Hiển thị lại phần checkbox
-        arrowIconAuthor.classList.remove('open'); // Đổi icon về trạng thái mở
-        authorDiv.style.height = '200px'; // Đặt lại chiều cao khi hiển thị checkbox
+        checkboxContentAuthor.style.display = 'block';
+        arrowIconAuthor.classList.remove('open');
+        authorDiv.style.height = '200px';
     } else {
-        checkboxContentAuthor.style.display = 'none'; // Ẩn phần checkbox
-        arrowIconAuthor.classList.add('open'); // Đổi icon thành đóng
-        authorDiv.style.height = '37px'; // Đặt chiều cao khi ẩn checkbox
+        checkboxContentAuthor.style.display = 'none';
+        arrowIconAuthor.classList.add('open');
+        authorDiv.style.height = '37px';
     }
 });
+
 // JavaScript cho Price
 document.getElementById('toggle-price').addEventListener('click', function () {
-    var priceContent = document.getElementById('price-content'); // Nội dung phần giá
-    var arrowIconPrice = document.getElementById('arrow-icon-price'); // Icon mũi tên
-    var priceContainer = document.getElementById('price-container'); // Phần div chứa cả khối
+    var priceContent = document.getElementById('price-content');
+    var arrowIconPrice = document.getElementById('arrow-icon-price');
+    var priceContainer = document.getElementById('price-container'); 
 
-    // Kiểm tra trạng thái hiện tại
     if (priceContent.style.display === 'none' || priceContent.style.display === '') {
-        priceContent.style.display = 'block'; // Hiển thị lại nội dung
-        arrowIconPrice.classList.remove('open'); // Icon mũi tên mở
-        priceContainer.style.height = '130px'; // Đặt chiều cao cho khối
+        priceContent.style.display = 'block';
+        arrowIconPrice.classList.remove('open');
+        priceContainer.style.height = '130px';
     } else {
-        priceContent.style.display = 'none'; // Ẩn nội dung
-        arrowIconPrice.classList.add('open'); // Icon mũi tên đóng
-        priceContainer.style.height = '37px'; // Thu nhỏ chiều cao
+        priceContent.style.display = 'none';
+        arrowIconPrice.classList.add('open');
+        priceContainer.style.height = '37px';
     }
 });
 
+// JavaScript cho Thể loại sách
+document.getElementById('toggle-category').addEventListener('click', function () {
+    var categoryContent = document.getElementById('category-content');
+    var arrowIconCategory = document.getElementById('arrow-icon-category');
+    var categoryContainer = document.getElementById('category-container'); 
+
+    if (categoryContent.style.display === 'none' || categoryContent.style.display === '') {
+        categoryContent.style.display = 'block';
+        arrowIconCategory.classList.remove('open');
+        categoryContainer.style.height = '200px';
+    } else {
+        categoryContent.style.display = 'none';
+        arrowIconCategory.classList.add('open');
+        categoryContainer.style.height = '37px';
+    }
+});
+
+// JavaScript cho Đối tượng
+document.getElementById('toggle-target-audience').addEventListener('click', function () {
+    var targetAudienceContent = document.getElementById('target-audience-content');
+    var arrowIconTargetAudience = document.getElementById('arrow-icon-target-audience');
+    var targetAudienceContainer = document.getElementById('target-audience-container'); 
+
+    if (targetAudienceContent.style.display === 'none' || targetAudienceContent.style.display === '') {
+        targetAudienceContent.style.display = 'block';
+        arrowIconTargetAudience.classList.remove('open');
+        targetAudienceContainer.style.height = '200px';
+    } else {
+        targetAudienceContent.style.display = 'none';
+        arrowIconTargetAudience.classList.add('open');
+        targetAudienceContainer.style.height = '37px';
+    }
+});
