@@ -21,11 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
    public function boot()
     {
-        // if (config('app.env') === 'production') {
-        //     URL::forceScheme('https');
-        // }
-        // if (!Storage::exists('public')) {
-        //     Artisan::call('storage:link');
-        // }
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+        if (!Storage::exists('public')) {
+            Artisan::call('storage:link');
+        }
     }
 }
