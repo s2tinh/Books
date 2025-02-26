@@ -85,6 +85,10 @@ if(document.getElementById('toggle-icon')){
 }
 
 
+document.getElementById('search1').addEventListener('input', function() {
+    var searchValue = this.value;
+    document.getElementById('search2').value = searchValue;
+});
 
 
 
@@ -114,47 +118,63 @@ if(document.getElementById('category')){
 }
 
 
-  // Tạo thanh trượt
-    var priceSlider = document.getElementById('price-slider');
-    var priceMinInput = document.getElementById('price-min');
-    var priceMaxInput = document.getElementById('price-max');
+// Hàm để lấy tham số từ URL
+function getUrlParameter(name) {
+    var url = new URL(window.location.href);
+    var params = new URLSearchParams(url.search);
+    return params.get(name);
+}
 
-    noUiSlider.create(priceSlider, {
-        start: [10000, 150000], // Giá trị ban đầu
-        connect: true, // Liên kết giữa 2 chấm kéo
-        range: {
-            'min': 0,
-            'max': 1000000
+// Lấy giá trị của price-min và price-max từ URL (nếu có)
+var priceMinFromUrl = getUrlParameter('price-min');
+var priceMaxFromUrl = getUrlParameter('price-max');
+
+// Kiểm tra và thiết lập giá trị mặc định nếu không có tham số trong URL
+var priceMin = priceMinFromUrl ? parseInt(priceMinFromUrl) : 10000;
+var priceMax = priceMaxFromUrl ? parseInt(priceMaxFromUrl) : 150000;
+
+// Tạo thanh trượt
+var priceSlider = document.getElementById('price-slider');
+var priceMinInput = document.getElementById('price-min');
+var priceMaxInput = document.getElementById('price-max');
+
+noUiSlider.create(priceSlider, {
+    start: [priceMin, priceMax], // Sử dụng giá trị từ URL hoặc giá trị mặc định
+    connect: true, // Liên kết giữa 2 chấm kéo
+    range: {
+        'min': 0,
+        'max': 1000000
+    },
+    step: 1000, // Bước giá trị
+    tooltips: [false, false], // Không hiển thị tooltip
+    format: {
+        to: function (value) {
+            return Math.round(value); // Làm tròn giá trị
         },
-        step: 1000, // Bước giá trị
-        tooltips: [false, false], // Không hiển thị tooltip
-        format: {
-            to: function (value) {
-                return Math.round(value); // Làm tròn giá trị
-            },
-            from: function (value) {
-                return value;
-            }
+        from: function (value) {
+            return value;
         }
-    });
+    }
+});
 
-    // Cập nhật giá trị trên thanh trượt khi người dùng thay đổi ô nhập liệu
-    priceMinInput.addEventListener('change', function () {
-        priceSlider.noUiSlider.set([priceMinInput.value, null]);
-    });
+// Cập nhật giá trị trên thanh trượt khi người dùng thay đổi ô nhập liệu
+priceMinInput.addEventListener('change', function () {
+    priceSlider.noUiSlider.set([priceMinInput.value, null]);
+});
 
-    priceMaxInput.addEventListener('change', function () {
-        priceSlider.noUiSlider.set([null, priceMaxInput.value]);
-    });
+priceMaxInput.addEventListener('change', function () {
+    priceSlider.noUiSlider.set([null, priceMaxInput.value]);
+});
 
-    // Cập nhật giá trị các ô nhập liệu khi thanh trượt thay đổi
-    priceSlider.noUiSlider.on('update', function (values, handle) {
-        if (handle === 0) {
-            priceMinInput.value = values[0]; // Cập nhật giá trị của ô input min
-        } else {
-            priceMaxInput.value = values[1]; // Cập nhật giá trị của ô input max
-        }
-    });
+// Cập nhật giá trị các ô nhập liệu khi thanh trượt thay đổi
+priceSlider.noUiSlider.on('update', function (values, handle) {
+    if (handle === 0) {
+        priceMinInput.value = values[0]; // Cập nhật giá trị của ô input min
+    } else {
+        priceMaxInput.value = values[1]; // Cập nhật giá trị của ô input max
+    }
+});
+
 
 
 document.addEventListener('DOMContentLoaded', function () {

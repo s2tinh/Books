@@ -1,5 +1,3 @@
-
-
 <!-- Navbar -->
 <div class="navbarstick border">
     <div class="container-fluid m-1">
@@ -9,14 +7,19 @@
                     <!-- Logo (Col-3) -->
                     <div class="col-2 col-sm-3 col-md-3">
                         <a class="navbar-brand" href="/">
-                            <img id='logo'src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
+                            <img id='logo' src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
                         </a>
                     </div>
 
                     <!-- Tìm kiếm (Col-6) -->
                     <div class="col-9 col-sm-6 col-md-6 d-flex justify-content-center">
-                        <form action="/search" method="GET" class="d-flex w-100">
-                            <input type="text" name="query" class="form-control" placeholder="Tìm kiếm..." style="border: 1px solid #ddd; border-radius: 30px; padding: 0.5rem 1rem;">
+                        <form action="{{ url('/app/books') }}" method="GET" class="d-flex w-100">
+                            <!-- Thêm các tham số category_id và các tham số khác vào URL -->
+                            <input id="search1" type="text" name="search" class="form-control" placeholder="Tìm kiếm..." value="{{ request()->get('search') }}" style="border: 1px solid #ddd; border-radius: 30px; padding: 0.5rem 1rem;">
+                            
+                            <!-- Sử dụng hidden để gửi tham số category_id cùng với tìm kiếm -->
+                            <input type="hidden" name="category_id" value="{{ is_array(request()->get('category_id')) ? implode(',', request()->get('category_id')) : request()->get('category_id') }}">
+                            
                             <button type="submit" class="btn btn-primary ms-2" style="border-radius: 30px;">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -30,13 +33,11 @@
                         </a>
                     </div>
 
-
                 </div>
             </div>
         </nav>
     </div>
 </div>
-
 
 
 <!-- Bootstrap JS và Popper.js -->
