@@ -108,3 +108,8 @@ Route::get('/webhooks', [WebhookController::class, 'handleWebhook']);
 
 
 Route::get('/payment/check/{transactionId}', [PaymentController::class, 'checkPayment']); //xxx  NH sacombank k hổ trợ 
+
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});

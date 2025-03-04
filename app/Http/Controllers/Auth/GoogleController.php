@@ -36,9 +36,10 @@ class GoogleController extends Controller
                 $user = User::create([
                     'name' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
-                    'google_id' => $googleUser->getId(),
+                    'app_id' => $googleUser->getId(),
                     'avatar' => $googleUser->getAvatar(),
                     'password' =>$googleUser->getId(),
+                    'type_app'=>'1',
                 ]);
             }
 

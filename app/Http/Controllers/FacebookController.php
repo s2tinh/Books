@@ -14,27 +14,36 @@ class FacebookController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    // Xử lý phản hồi từ Facebook
     public function handleFacebookCallback()
     {
         try {
             $facebookUser = Socialite::driver('facebook')->user();
 
-            // Kiểm tra xem user đã tồn tại hay chưa
-            $user = User::updateOrCreate(
-                ['facebook_id' => $facebookUser->id],
-                [
-                    'name' => $facebookUser->name,
-                    'email' => $facebookUser->email,
-                    'password' =>   $facebookUser->id
-                ]
-            );
+            // Kiểm tra user theo email trước
+            $user = User::where('email', $facebookUser->email)->first();
 
+            if ($user) {
+                // Nếu user đã tồn tại, cập nhật app_id (tránh lỗi trùng email)
+                $user->update(['app_id' => $facebookUser->id]);
+            } else {
+                // Nếu chưa có user, tạo mới
+                $user = User::create([
+                    'app_id' => $facebookUser->id,
+                    'name' => $facebookUser->name,
+                    'email' => $facebookUser->email ?? $facebookUser->id . '@facebook.com',
+                    'password' => bcrypt($facebookUser->id),
+                    'avatar' => $facebookUser->avatar,
+                    'type_app' => '2',
+                ]);
+            }
+
+            // Đăng nhập user
             Auth::login($user);
 
             return redirect('/')->with('success', 'Đăng nhập thành công!');
         } catch (\Exception $e) {
-            return redirect('/login')->withErrors(['login' => 'Đăng nhập thất bại!']);
+            return redirect()->route('login')->withErrors('đăng nhập thất bại');
         }
     }
+
 }
