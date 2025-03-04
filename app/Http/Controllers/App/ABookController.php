@@ -13,22 +13,134 @@ use App\Http\Controllers\Controller;
 class ABookController extends Controller
 {
 
-    public function detailView(Request $request)
-    {
-        // Lấy ID từ query string
-        $id = $request->query('id');
+public function cartUpdate(Request $request)
+{
+    $cart = session()->get('cart', []);
 
-        // Lấy thông tin sách từ cơ sở dữ liệu kèm danh mục, phụ danh mục và hình ảnh
-        $book = Book::with(['category', 'subCategory', 'bookImages'])->find($id);
+    $id = $request->id;
+    $quantity = (int) $request->quantity;
 
-        // Kiểm tra nếu sách không tồn tại
-        if (!$book) {
-            return redirect()->route('home')->with('error', 'Sách không tồn tại.');
+    if (isset($cart[$id])) {
+        if ($quantity > 0) {
+            $cart[$id]['quantity'] = $quantity;
+        } else {
+            unset($cart[$id]);
         }
-
-        // Trả về view với dữ liệu sách
-        return view('books.app.detailView', compact('book'));
+        session()->put('cart', $cart);
     }
+
+    // Tính lại tổng tiền từng sản phẩm và tổng giỏ hàng
+    $itemTotal = $cart[$id]['price'] * $cart[$id]['quantity'];
+    $cartTotal = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $cart));
+
+    return response()->json([
+        'success' => true,
+        'newTotal' => number_format($itemTotal, 0, ',', '.') . ' VND', // Định dạng số tiền đúng
+        'cartTotal' => number_format($cartTotal, 0, ',', '.') . ' VND',
+    ]);
+}
+
+    public function checkout_cart(Request $request)
+{
+    $bookId = $request->input('id');
+    $quantity = $request->input('quantity');
+    // Tìm sách trong cơ sở dữ liệu
+    $book = Book::findOrFail($bookId);
+
+    // Lấy giỏ hàng từ session
+    $cart = session()->get('cart', []);
+
+    // Kiểm tra xem sách đã có trong giỏ hàng chưa
+    if(isset($cart[$bookId])) {
+        $cart[$bookId]['quantity'] += $quantity;
+    } else {
+        $cart[$bookId] = [
+            'id' => $bookId,
+            'title' => $book->title,
+            'price' => $book->price,
+            'quantity' => $quantity,
+        ];
+    }
+
+    // Lưu giỏ hàng vào session
+    session()->put('cart', $cart);
+
+    // Quay lại trang giỏ hàng
+    return redirect()->route('books.app.checkout_cart.view');
+}
+public function viewCart()
+{
+    // Lấy giỏ hàng từ session
+    $cart = session()->get('cart', []);
+
+    // Hiển thị giỏ hàng
+    return view('books.app.checkout_cart', compact('cart'));
+}
+public function removeFromCart($id)
+{
+    // Lấy giỏ hàng từ session
+    $cart = session()->get('cart', []);
+
+    // Kiểm tra nếu sách có trong giỏ hàng và xóa
+    if(isset($cart[$id])) {
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+    }
+
+    // Quay lại trang giỏ hàng
+    return redirect()->route('books.app.checkout_cart.view');
+}
+public function finalizeCheckout()
+{
+    // Lấy giỏ hàng từ session
+    $cart = session()->get('cart', []);
+
+    // Kiểm tra giỏ hàng và thực hiện thanh toán
+    if(count($cart) == 0) {
+        return redirect()->route('books.app.listView')->with('error', 'Giỏ hàng của bạn trống!');
+    }
+
+    // Thực hiện thanh toán (ví dụ: lưu đơn hàng, trừ tiền, v.v...)
+
+    // Sau khi thanh toán xong, xóa giỏ hàng trong session
+    session()->forget('cart');
+
+    // Quay lại trang thành công
+    return redirect()->route('books.app.listView')->with('success', 'Thanh toán thành công!');
+}
+
+
+public function detailView(Request $request)
+{
+    // Lấy ID từ query string
+    $id = $request->query('id');   
+
+    // Lấy thông tin sách từ cơ sở dữ liệu kèm danh mục, phụ danh mục và hình ảnh
+    $book = Book::with(['category', 'subCategory', 'bookImages'])->find($id);
+
+
+
+    // Lấy các sách cùng sub_category (5 sản phẩm, ngoại trừ sách hiện tại)
+    $relatedBooksSubCategory = Book::where('sub_category_id', $book->subCategory->id)
+                                    ->where('id', '!=', $book->id)  // Loại bỏ sách hiện tại
+                                    ->limit(5)  // Lấy 5 sách cùng sub_category
+                                    ->get();
+
+    // Lấy category của sách hiện tại qua mối quan hệ hasOneThrough
+    $categoryId = $book->category ? $book->category->id : null;
+
+    // Lấy các sách cùng category (10 sản phẩm, ngoại trừ sách hiện tại và sách đã lấy từ sub_category)
+    $relatedBooksCategory = Book::whereHas('category', function($query) use ($categoryId) {
+                                    $query->where('categories.id', $categoryId); // Lọc theo category, chỉ định rõ bảng 'categories'
+                                })
+                                ->where('id', '!=', $book->id)  // Loại bỏ sách hiện tại
+                                ->whereNotIn('id', $relatedBooksSubCategory->pluck('id'))  // Loại bỏ sách đã lấy từ sub_category
+                                ->limit(10)  // Lấy 10 sách cùng category
+                                ->get();
+
+    // Trả về view với dữ liệu sách và các sách liên quan
+    return view('books.app.detailView', compact('book', 'relatedBooksSubCategory', 'relatedBooksCategory'));
+}
 
 
 
@@ -126,7 +238,7 @@ public function listView(Request $request)
     }
 
     // Lọc theo price-min và price-max nếu có
-    if ($priceMin !== null || $priceMax !== null) {
+    if ($priceMin != 0 || $priceMax != 0) {
         $categories = $categories->map(function ($category) use ($priceMin, $priceMax) {
             $category->subCategories = $category->subCategories->map(function ($subCategory) use ($priceMin, $priceMax) {
                 $subCategory->books = $subCategory->books->filter(function ($book) use ($priceMin, $priceMax) {

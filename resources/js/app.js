@@ -130,8 +130,8 @@ var priceMinFromUrl = getUrlParameter('price-min');
 var priceMaxFromUrl = getUrlParameter('price-max');
 
 // Kiểm tra và thiết lập giá trị mặc định nếu không có tham số trong URL
-var priceMin = priceMinFromUrl ? parseInt(priceMinFromUrl) : 10000;
-var priceMax = priceMaxFromUrl ? parseInt(priceMaxFromUrl) : 150000;
+var priceMin = priceMinFromUrl ? parseInt(priceMinFromUrl) : 0;
+var priceMax = priceMaxFromUrl ? parseInt(priceMaxFromUrl) : 0;
 
 // Tạo thanh trượt
 var priceSlider = document.getElementById('price-slider');
@@ -301,3 +301,4 @@ document.getElementById('toggle-target-audience').addEventListener('click', func
         targetAudienceContainer.style.height = '37px';
     }
 });
+

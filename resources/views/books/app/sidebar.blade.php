@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <style>
     #price-slider {
-        width: 100%;
+        width: 95%;
         height: 8px;
         margin: 20px 0;
     }

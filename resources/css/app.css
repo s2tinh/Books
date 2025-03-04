@@ -823,3 +823,169 @@ button.btn {
         z-index: -1; /* Đưa phần tử xuống dưới để không che khuất các phần tử khác */
     }
 }
+ .product-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Để căn đều 2 bên */
+  gap: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px; /* Bo tròn góc cho khối chứa số lượng */
+  border: 1px solid #ddd; /* Thêm đường viền */
+  padding: 5px;
+}
+
+.quantity-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px; /* Bo tròn góc cho nút */
+}
+
+.quantity-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px; /* Bo tròn góc cho ô nhập số lượng */
+}
+
+.stock-status {
+  font-size: 14px;
+  color: green;
+  font-weight: bold;
+  text-align: right; /* Căn phải chữ "Còn hàng" */
+}
+
+.buy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px; /* Bo tròn góc cho nút Mua Hàng */
+}
+
+.buy-btn i {
+  margin-right: 8px;
+}
+
+.buy-btn:hover {
+  background-color: #218838;
+}
+
+/* Định dạng tab list để chúng nằm ngang */
+.ty-tabs__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+
+}
+
+/* Định dạng từng item trong tab */
+.ty-tabs__item {
+    flex: 1;
+    text-align: left;
+    padding: 0px;
+    padding-top: 30px;
+}
+
+/* Định dạng link trong tab */
+.ty-tabs__a {
+    display: block;
+padding-top: 10px;
+padding-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+/* Màu nền khi hover */
+.ty-tabs__a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Kiểu tab khi được chọn */
+.ty-tabs__item.active .ty-tabs__a {
+
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid #red;
+}
+
+/* Tab content */
+.tab-content {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+/* Nội dung của từng tab */
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+.sticky-div {
+    position: -webkit-sticky; /* Dành cho các trình duyệt cũ */
+    position: sticky;
+    top: 20px; /* Điều chỉnh khoảng cách từ trên cùng khi cuộn */
+    z-index: 10; /* Đảm bảo nó không bị che khuất */
+}
+
+
+/* Vô hiệu hóa sticky khi màn hình nhỏ (ví dụ: trên điện thoại) */
+@media (max-width: 768px) {
+  .sticky-div {
+    position: static; /* Vô hiệu hóa position sticky */
+  }
+}
+
+
+@media (max-width: 576px) { 
+    table {
+        font-size: 10px;
+    }
+    .quantity-input {
+        width: 30px; /* Giảm kích thước input */
+    }
+    .btn-sm {
+        padding: 2px 5px; /* Giảm kích thước nút */
+        font-size: 10px;
+    }
+}
+td.nowrap {
+    white-space: nowrap;
+}
+.modal-dialog {
+    max-width: 400px; /* Điều chỉnh chiều rộng của modal */
+}
+/* Thêm z-index cao cho modal */
+.modal-backdrop {
+    z-index: 10040 !important; /* Đảm bảo backdrop không bị che khuất */
+}
+
+.modal {
+    z-index: 10050 !important; /* Đảm bảo modal hiển thị trên tất cả các phần tử khác */
+}
+
+/* Nếu cần điều chỉnh thêm cho modal-dialog */
+.modal-dialog {
+    z-index: 10060 !important; /* Tăng thêm z-index nếu cần */
+}

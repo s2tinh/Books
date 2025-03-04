@@ -2,7 +2,7 @@
 <div class="navbarstick border">
     <div class="container-fluid m-1">
         <nav class="navbar navbar-expand-lg navbar-light bg-white" style="padding: 0;">
-            <div class="container">
+            <div class="container" style="padding-right: 0px;">
                 <div class="row w-100 align-items-center">
                     <!-- Logo (Col-3) -->
                     <div class="col-2 col-sm-3 col-md-3">
@@ -27,7 +27,7 @@
                     </div>
 
                     <!-- Giỏ hàng (Col-3) -->
-                    <div class="col-1 col-sm-3 col-md-3 d-flex justify-content-end">
+                    <div class="col-1 col-sm-3 col-md-3 d-flex justify-content-end p-0">
                         <a class="nav-link text-primary circle-icon" href="/gio-hang">
                             <i class="fas fa-shopping-cart"></i>
                         </a>

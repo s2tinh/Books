@@ -18,34 +18,43 @@ class AuthController extends Controller
     }
 
     // Xử lý đăng nhập
-    public function handleLogin(Request $request)
-    {
-        // Xác thực dữ liệu đầu vào
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',  // Email phải là định dạng email
-            'password' => 'required|min:6', // Mật khẩu phải có ít nhất 6 ký tự
-        ]);
+public function handleLogin(Request $request)
+{
+    // Kiểm tra dữ liệu đầu vào
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ]);
 
-        // Nếu dữ liệu không hợp lệ, quay lại với thông báo lỗi
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        // Kiểm tra thông tin đăng nhập
-        if (Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password,
-        ], $request->remember)) {
-            // Nếu đăng nhập thành công, chuyển hướng đến trang chủ hoặc trang bạn muốn
-            return redirect()->route('home');
-        } else {
-            // Nếu đăng nhập thất bại, quay lại với thông báo lỗi
-            return redirect()->back()->with('error', 'Thông tin đăng nhập không chính xác');
-        }
+    // Trả về lỗi nếu dữ liệu không hợp lệ
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'errors' => $validator->errors()
+        ], 422);
     }
+
+    // Kiểm tra thông tin đăng nhập
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        return back();
+    }
+
+    // Nếu đăng nhập thất bại
+    return back()->withErrors([
+        'email' => 'Thông tin đăng nhập không chính xác!'
+    ]);
+    
+}
+
 
     public function logout(Request $request)
     {
+
+            // Đảm bảo có session trước khi logout
+        if (session()->has('state')) {
+            session()->forget('state');
+        }
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -64,7 +73,17 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email',
         ]);
-        return redirect()->route('login')->with('status', 'Yêu cầu đặt lại mật khẩu đã được gửi!');
+
+        // Tích hợp gửi email reset mật khẩu
+        $response = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if ($response == Password::RESET_LINK_SENT) {
+            return back()->with('status', 'Yêu cầu đặt lại mật khẩu đã được gửi!');
+        } else {
+            return back()->withErrors(['email' => 'Không tìm thấy email này trong hệ thống.']);
+        }
     }
 
     // Hiển thị form đăng ký

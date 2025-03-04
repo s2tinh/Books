@@ -16,17 +16,19 @@
             </div>
         @endif
 
-        <form action="{{ route('login') }}" method="POST">
+        <form id="loginForm" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-4">
                 <input type="text" id="email" name="email" 
                        class="form-control bg-white border-0 border-bottom rounded-0 shadow-none" 
                        placeholder="Nhập Email" value="{{ old('email') }}" required>
+                <div id="emailError" class="text-danger mt-1 d-none"></div>
             </div>
             <div class="mb-4">
                 <input type="password" id="password" name="password" 
                        class="form-control bg-white border-0 border-bottom rounded-0 shadow-none" 
                        placeholder="Nhập Mật khẩu" required>
+                <div id="passwordError" class="text-danger mt-1 d-none"></div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <a href="{{ route('password.request') }}" class="text-decoration-none">Quên mật khẩu?</a>
@@ -49,3 +51,4 @@
     </div>
 </div>
 @endsection
+
