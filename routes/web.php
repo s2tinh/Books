@@ -113,3 +113,6 @@ Route::get('/payment/check/{transactionId}', [PaymentController::class, 'checkPa
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });
+Route::get('/data-deletion', function () {
+    return view('data-deletion');
+});
